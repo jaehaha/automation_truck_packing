@@ -1,0 +1,13 @@
+[project]
+name = "manibox-packing"
+version = "0.1.0"
+description = "MuJoCo environment for learning box placement in the ManiBox container (no manipulator)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "gymnasium>=1.4.0",
+  "mujoco>=3.2",
+  "numpy",
+]
+
+[tool.uv]
+package = false
