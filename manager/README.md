@@ -39,8 +39,8 @@ python  main.py --mode real --port /dev/tty.usbmodemXXXX   # 실물만
 ```
 modules/
   packing/   어디에 놓을지 → moves.json
-  mp/        어떻게 옮길지 → [레일, 관절1..6] 경유점
-  arm/  rail/  vacuum/  camera/     장치 인터페이스 (sim + real 백엔드)
+  arm/       팔 wrapper + 모션플래닝 (sequence/stacking/rules + model/assets)
+  rail/  vacuum/  camera/           장치 wrapper (sim + real)
   rail_vacuum.ino                   Arduino 1보드 펌웨어
 ```
 

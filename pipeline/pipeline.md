@@ -23,7 +23,7 @@ Packing Model 이 정한 순서대로 상자를 하나씩 집어 적재하고, �
 |---|---|---|---|---|
 | 2 | 사람이 투입 (수동) 위치 (85, 240), ArUco 마커 위 | 코드 X — `PICK_XY` 가 참조 좌표 | 사람 | 🟡 |
 | 3-a | 손목 카메라로 오차 측정 → BoxTable.current 보정 | `robot.measure_box()` (현재 더미) | 손목 카메라 | 🔴 |
-| 3-b | Motion Planning — `Plan(approach, carry, retreat)` | `Sequencer.plan()` (`modules/mp/sequence.py`) | — | 🟢 |
+| 3-b | Motion Planning — `Plan(approach, carry, retreat)` | `Sequencer.plan()` (`modules/arm/sequence.py`) | — | 🟢 |
 | 4 | 접근 — 투입 위치 위로 (빈손) | `robot.follow(plan.approach)` | 레일 🟢 + 팔 🔴 | 🟡 |
 | 5 | 흡착 ON — 상자 집기 | `robot.suction_on()` → Arduino `ON` | 솔레노이드 | 🟢 |
 | 6 | 반송 (carry) — MV_POS 거쳐 적재 자리로 | `robot.follow(plan.carry)` | 레일 🟢 + 팔 🔴 | 🟡 |

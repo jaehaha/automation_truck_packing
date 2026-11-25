@@ -1,233 +1,228 @@
-<mxfile host="app.diagrams.net">
-  <diagram id="pipeline" name="Pipeline">
-    <mxGraphModel dx="1600" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1340" math="0" shadow="0">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <mxCell id="t1" value="ManiBox 적재 파이프라인 — 구체 구현 매핑" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontColor=#222222;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="20" width="900" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="t2" value="단계 ← 파일 / 함수 ← 하드웨어 매핑. 블록 색깔 = 구현 상태." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="40" y="52" width="900" height="20" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="lg_green" value="&lt;b&gt;✅ 완료&lt;/b&gt;&#10;sim 모드에서 지금 바로 돌아감" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="86" width="430" height="46" as="geometry"/>
-        </mxCell>
-        <mxCell id="lg_yellow" value="&lt;b&gt;⚠️ 부분 구현&lt;/b&gt;&#10;sim 은 OK, real 은 추가 작업 필요 (또는 더미값 반환 중)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="480" y="86" width="430" height="46" as="geometry"/>
-        </mxCell>
-        <mxCell id="lg_red" value="&lt;b&gt;❌ 미구현&lt;/b&gt;&#10;뼈대만 있고 NotImplementedError 를 던지거나 아예 없음" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="920" y="86" width="430" height="46" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="col_a" value="&lt;b&gt;단계 (README 번호)&lt;/b&gt;" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="40" y="148" width="430" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="col_b" value="&lt;b&gt;호출 지점 (함수 / 파일)&lt;/b&gt;" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="480" y="148" width="430" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="col_c" value="&lt;b&gt;장치 / 하드웨어&lt;/b&gt;" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="920" y="148" width="430" height="28" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="pre" value="&lt;b&gt;사전 (한 번만)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=#fafafa;align=left;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="40" y="188" width="300" height="20" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s0a" value="&lt;b&gt;0. 상자 시퀀스 입력&lt;/b&gt;&#10;[id1, id2, …, idn] + 종류/하차지점" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="218" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s0b" value="&lt;b&gt;manager/main.py&lt;/b&gt;&#10;load_manifest(moves.json)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="218" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s0c" value="—" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" vertex="1" parent="1">
-          <mxGeometry x="920" y="218" width="430" height="60" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s1a" value="&lt;b&gt;1. Packing Model — 적재 계획&lt;/b&gt;&#10;학습된 정책 → 각 상자의 goal (순서대로)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="294" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s1b" value="&lt;b&gt;modules/packing/plan_moves.py&lt;/b&gt;&#10;(현재: moves_big.json 사전 생성본 사용. 런타임 호출로 바꾸려면 main.py 에 추가)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="294" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s1c" value="—" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" vertex="1" parent="1">
-          <mxGeometry x="920" y="294" width="430" height="60" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s_box" value="&lt;b&gt;BoxTable 초기화&lt;/b&gt;&#10;id → {size, current, goal, state=pending}" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="370" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s_box_b" value="&lt;b&gt;manager/boxes.py&lt;/b&gt;&#10;BoxTable.add(id, size), set_goal(id, goal)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="370" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s_box_c" value="—" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" vertex="1" parent="1">
-          <mxGeometry x="920" y="370" width="430" height="56" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="loop_banner" value="&lt;b&gt;LOOP — 상자 하나씩 (manager/main.py :88 for)&lt;/b&gt;" style="text;html=1;strokeColor=#cccccc;fillColor=#fff9e6;align=center;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="40" y="450" width="1310" height="28" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s2a" value="&lt;b&gt;2. 사람이 투입 (수동)&lt;/b&gt;&#10;투입 위치 (85, 240)&#10;상자 윗면 ArUco 마커 중앙에 정렬" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="490" width="430" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="s2b" value="&lt;b&gt;코드엔 없음 (수동 작업)&lt;/b&gt;&#10;modules/mp/stacking.py :37 PICK_XY 가 이 위치의 좌표계 기준값 — 컨테이너 좌표계 통일 시 업데이트 필요" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="490" width="430" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="s2c" value="사람" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="920" y="490" width="430" height="70" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s3a" value="&lt;b&gt;3-a. 손목 카메라 오차 측정&lt;/b&gt;&#10;ArUco 로 dx, dy, yaw 측정 → BoxTable.set_current(측정값)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="580" width="430" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="s3b" value="&lt;b&gt;robot.measure_box()&lt;/b&gt;&#10;manager/robot.py :106 — 현재는 더미 (0, 0, 0) 반환&#10;RealCamera (OpenCV + ArUco) 미구현" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="580" width="430" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="s3c" value="&lt;b&gt;손목 카메라&lt;/b&gt; (USB)&#10;modules/camera/camera.py — RealCamera" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="580" width="430" height="70" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s3b2" value="&lt;b&gt;3-b. Motion Planning — 경로 생성&lt;/b&gt;&#10;4단계: 집기 → 이송 자세 → 레일 → 놓기&#10;Plan(approach, carry, retreat) 반환" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="670" width="430" height="78" as="geometry"/>
-        </mxCell>
-        <mxCell id="s3b2b" value="&lt;b&gt;Sequencer.plan(i, goal, size)&lt;/b&gt;&#10;modules/mp/sequence.py :150&#10;_tpl() → _check()&#10;IK·충돌: modules/mp/stacking.py&#10;편집 가능한 규칙: modules/mp/rules.py" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="670" width="430" height="78" as="geometry"/>
-        </mxCell>
-        <mxCell id="s3b2c" value="— (순수 계산)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="920" y="670" width="430" height="78" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="sxa" value="&lt;b&gt;실행 — skills.pick_and_place&lt;/b&gt;&#10;manager/skills.py" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=13;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="768" width="430" height="52" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s4a" value="&lt;b&gt;4. 접근&lt;/b&gt;&#10;현재 자세 → 투입 위치 위 (빈손)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="840" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s4b" value="&lt;b&gt;robot.follow(plan.approach)&lt;/b&gt;&#10;manager/robot.py :82&#10;rail.command(q[0]) + arm.command(q[1:7])  (타이밍 A)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="840" width="430" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="s4c" value="&lt;b&gt;레일&lt;/b&gt; Arduino M&lt;mm&gt;  (✅)&#10;&lt;b&gt;팔&lt;/b&gt; Piper CAN JointCtrl  (❌)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="840" width="430" height="60" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s5a" value="&lt;b&gt;5. 흡착 ON — 상자 집기&lt;/b&gt;&#10;붙을 때까지 대기" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="920" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s5b" value="&lt;b&gt;robot.suction_on()&lt;/b&gt;  →  suction.on()&#10;modules/vacuum/suction.py (RealSuction.on → 'ON\n')" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="920" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s5c" value="&lt;b&gt;솔레노이드 밸브&lt;/b&gt;&#10;Arduino D7 LOW-Trigger 릴레이" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="920" width="430" height="56" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s6a" value="&lt;b&gt;6. 반송 (carry)&lt;/b&gt;&#10;lifting → aligning → rotating → MV_POS → 레일 이동 → 내리기·밀어넣기 → 놓기" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="996" width="430" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="s6b" value="&lt;b&gt;robot.follow(plan.carry, box_follow=...)&lt;/b&gt;&#10;sim: box_follow 가 상자를 공구에 붙여 시각화&#10;MV_CUP_POS = 0.47 m (modules/mp/stacking.py :44)&#10;레일 명령: '0~1000 mm' 아두이노 좌표" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="996" width="430" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="s6c" value="&lt;b&gt;레일&lt;/b&gt; + &lt;b&gt;팔&lt;/b&gt; 동시&#10;Arduino + Piper CAN&#10;(레일 ✅, 팔 ❌)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="996" width="430" height="80" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s7a" value="&lt;b&gt;7. 흡착 OFF&lt;/b&gt;&#10;상자 분리" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="1096" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s7b" value="&lt;b&gt;robot.suction_off()&lt;/b&gt;  →  suction.off()&#10;Arduino 'OFF\n' → 밸브 비활성" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="1096" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s7c" value="&lt;b&gt;솔레노이드 밸브&lt;/b&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="1096" width="430" height="56" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s8a" value="&lt;b&gt;8. 후퇴 (retreat) + 레일 0 복귀&lt;/b&gt;&#10;놓은 자세 → MV_POS → 투입 자세&#10;(현재: retreat path 가 담당, home() 명시 선택)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="1172" width="430" height="76" as="geometry"/>
-        </mxCell>
-        <mxCell id="s8b" value="&lt;b&gt;robot.follow(plan.retreat)&lt;/b&gt;&#10;(선택) robot.rail.home()  → Arduino 'HOME\n'" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="1172" width="430" height="76" as="geometry"/>
-        </mxCell>
-        <mxCell id="s8c" value="&lt;b&gt;레일&lt;/b&gt; + &lt;b&gt;팔&lt;/b&gt;&#10;(레일 ✅, 팔 ❌)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="920" y="1172" width="430" height="76" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="s9a" value="&lt;b&gt;9. BoxTable 갱신 → 다음 상자 반복&lt;/b&gt;&#10;table.done(id): current = goal, state = placed" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="1268" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s9b" value="&lt;b&gt;table.done(box_id)&lt;/b&gt;  →  main.py for 루프 다음 iteration" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="480" y="1268" width="430" height="56" as="geometry"/>
-        </mxCell>
-        <mxCell id="s9c" value="—" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" vertex="1" parent="1">
-          <mxGeometry x="920" y="1268" width="430" height="56" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="loop_back" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1350" y="1296" as="sourcePoint"/>
-            <mxPoint x="1420" y="1296" as="targetPoint"/>
-            <Array as="points">
-              <mxPoint x="1390" y="1296"/>
-              <mxPoint x="1390" y="520"/>
-              <mxPoint x="480" y="520"/>
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="loop_back_label" value="다음 상자" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;fontSize=11;fontColor=#9a7d00;" vertex="1" parent="1">
-          <mxGeometry x="1360" y="860" width="60" height="20" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e01" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s0a" target="s1a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e12" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s1a" target="s_box"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e23" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s2a" target="s3a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e34" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s3a" target="s3b2"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e45" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s3b2" target="sxa"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e56" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="sxa" target="s4a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e67" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s4a" target="s5a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e78" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s5a" target="s6a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e89" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s6a" target="s7a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e9a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s7a" target="s8a"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="eab" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="s8a" target="s9a"><mxGeometry relative="1" as="geometry"/></mxCell>
-
-        <mxCell id="hw_title" value="&lt;b&gt;장치 레이어 — 추상화&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="148" width="260" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="hw_arm" value="&lt;b&gt;Arm&lt;/b&gt;  modules/arm/arm.py&#10;read(), command(q)&#10;Sim: MuJoCo ctrl[1:7]  ✅&#10;Real: Piper CAN  ❌&#10;Dual: 둘 다 (팔 때문에 블록)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="188" width="260" height="110" as="geometry"/>
-        </mxCell>
-        <mxCell id="hw_rail" value="&lt;b&gt;Rail&lt;/b&gt;  modules/rail/rail.py&#10;read(), command(m), home()&#10;Sim: MuJoCo ctrl[0]  ✅&#10;Real: Arduino M/P/H  ✅&#10;Dual: 둘 다  ✅" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="308" width="260" height="110" as="geometry"/>
-        </mxCell>
-        <mxCell id="hw_suc" value="&lt;b&gt;Suction&lt;/b&gt;  modules/vacuum/suction.py&#10;on(), off(), holding()&#10;Sim: 상태만 추적  ✅&#10;Real: Arduino ON/OFF  ✅&#10;Dual: 둘 다  ✅" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="428" width="260" height="110" as="geometry"/>
-        </mxCell>
-        <mxCell id="hw_cam" value="&lt;b&gt;Camera&lt;/b&gt;  modules/camera/camera.py&#10;frame(), markers()&#10;Sim: MuJoCo 렌더  ✅&#10;Real: OpenCV + ArUco  ❌&#10;Dual: 둘 다 (카메라 때문에 블록)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="548" width="260" height="110" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="hw_ard" value="&lt;b&gt;Arduino (공유 시리얼)&lt;/b&gt;&#10;manager/arduino.py — Arduino.send()&#10;펌웨어: modules/rail_vacuum.ino&#10;프로토콜: M/P/H, ON/OFF, POS, STOP&#10;115200 baud, ASCII" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="668" width="260" height="110" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="hw_rob" value="&lt;b&gt;Robot&lt;/b&gt;  manager/robot.py&#10;네 장치 묶음 (DualArm, DualRail, DualSuction, DualCamera)&#10;.sim / .real / .dual 팩토리&#10;follow(wps), suction_on/off(), state(), stop()" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="788" width="260" height="110" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="hw_entry" value="&lt;b&gt;엔트리&lt;/b&gt;  manager/main.py&#10;--mode sim | real | dual&#10;--port /dev/tty.usbmodem*&#10;--can can0" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="908" width="260" height="92" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="pass" value="&lt;b&gt;Pass-through 레일 명령 (타이밍 A)&lt;/b&gt;&#10;rail.command(m) → Arduino 'M&lt;mm&gt;'&#10;MOVE 중 새 MOVE 는 Arduino 가 'ERROR busy' 로 거부 → RealRail 이 조용히 무시, 다음 호출에 최신 목표로 따라감." style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="1020" width="260" height="90" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="defer" value="&lt;b&gt;좌표계 통일 (후속 작업)&lt;/b&gt;&#10;현재: Sequencer 는 MuJoCo 좌표, RealRail(zero_offset_m=-0.49) 로 Arduino 0-1000 mm 와 연결.&#10;추후: &quot;컨테이너 좌표계&quot; 로 모든 상수(ORIGIN, PICK_XY, KEEPOUT_X) 정비 예정." style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="1120" width="260" height="130" as="geometry"/>
-        </mxCell>
-
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram id="pipeline" name="Pipeline">
+        <mxGraphModel dx="100" dy="123" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1340" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="t1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontColor=#222222;fontStyle=1;" value="ManiBox 적재 파이프라인 — 구체 구현 매핑" vertex="1">
+                    <mxGeometry height="30" width="900" x="40" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="t2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontColor=#666666;" value="단계 ← 파일 / 함수 ← 하드웨어 매핑. 블록 색깔 = 구현 상태." vertex="1">
+                    <mxGeometry height="20" width="900" x="40" y="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="lg_green" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;✅ 완료&lt;/b&gt;&#xa;sim 모드에서 지금 바로 돌아감" vertex="1">
+                    <mxGeometry height="46" width="430" x="40" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="lg_yellow" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;⚠️ 부분 구현&lt;/b&gt;&#xa;sim 은 OK, real 은 추가 작업 필요 (또는 더미값 반환 중)" vertex="1">
+                    <mxGeometry height="46" width="430" x="480" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="lg_red" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=12;" value="&lt;b&gt;❌ 미구현&lt;/b&gt;&#xa;뼈대만 있고 NotImplementedError 를 던지거나 아예 없음" vertex="1">
+                    <mxGeometry height="46" width="430" x="920" y="86" as="geometry"/>
+                </mxCell>
+                <mxCell id="col_a" parent="1" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" value="&lt;b&gt;단계 (README 번호)&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="28" width="430" x="40" y="148" as="geometry"/>
+                </mxCell>
+                <mxCell id="col_b" parent="1" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" value="&lt;b&gt;호출 지점 (함수 / 파일)&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="28" width="430" x="480" y="148" as="geometry"/>
+                </mxCell>
+                <mxCell id="col_c" parent="1" style="text;html=1;strokeColor=#aaaaaa;fillColor=#f0f0f0;align=center;verticalAlign=middle;fontSize=13;" value="&lt;b&gt;장치 / 하드웨어&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="28" width="430" x="920" y="148" as="geometry"/>
+                </mxCell>
+                <mxCell id="pre" parent="1" style="text;html=1;strokeColor=none;fillColor=#fafafa;align=left;verticalAlign=middle;fontSize=12;fontColor=#555555;" value="&lt;b&gt;모션플래닝 전에 한 번만&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="20" width="300" x="40" y="188" as="geometry"/>
+                </mxCell>
+                <mxCell id="s0a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;0. 상자 시퀀스 입력&lt;/b&gt;&#xa;[id1, id2, …, idn] + 종류/하차지점" vertex="1">
+                    <mxGeometry height="60" width="430" x="40" y="218" as="geometry"/>
+                </mxCell>
+                <mxCell id="s0b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;manager/main.py&lt;/b&gt;&#xa;load_manifest(moves.json)" vertex="1">
+                    <mxGeometry height="60" width="430" x="480" y="218" as="geometry"/>
+                </mxCell>
+                <mxCell id="s0c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" value="—" vertex="1">
+                    <mxGeometry height="60" width="430" x="920" y="218" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;1. Packing Model — 적재 계획&lt;/b&gt;&#xa;학습된 정책 → 각 상자의 goal (순서대로)" vertex="1">
+                    <mxGeometry height="60" width="430" x="40" y="294" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;modules/packing/plan_moves.py&lt;/b&gt;&#xa;(현재: moves_big.json 사전 생성본 사용. 런타임 호출로 바꾸려면 main.py 에 추가)" vertex="1">
+                    <mxGeometry height="60" width="430" x="480" y="294" as="geometry"/>
+                </mxCell>
+                <mxCell id="s1c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" value="—" vertex="1">
+                    <mxGeometry height="60" width="430" x="920" y="294" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_box" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;BoxTable 초기화&lt;/b&gt;&#xa;id → {size, current, goal, state=pending}" vertex="1">
+                    <mxGeometry height="56" width="430" x="40" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_box_b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;manager/boxes.py&lt;/b&gt;&#xa;BoxTable.add(id, size), set_goal(id, goal)" vertex="1">
+                    <mxGeometry height="56" width="430" x="480" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="s_box_c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" value="—" vertex="1">
+                    <mxGeometry height="56" width="430" x="920" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="loop_banner" parent="1" style="text;html=1;strokeColor=#cccccc;fillColor=#fff9e6;align=center;verticalAlign=middle;fontSize=13;" value="&lt;b&gt;LOOP — 상자 하나씩 (manager/main.py :88 for)&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="28" width="1310" x="40" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="s2a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;2. 사람이 투입 (수동)&lt;/b&gt;&#xa;투입 위치 (85, 240)&#xa;상자 윗면 ArUco 마커 중앙에 정렬" vertex="1">
+                    <mxGeometry height="70" width="430" x="40" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="s2b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;코드엔 없음 (수동 작업)&lt;/b&gt;&#xa;modules/arm/stacking.py :37 PICK_XY 가 이 위치의 좌표계 기준값 — 컨테이너 좌표계 통일 시 업데이트 필요" vertex="1">
+                    <mxGeometry height="70" width="430" x="480" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="s2c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" value="사람" vertex="1">
+                    <mxGeometry height="70" width="430" x="920" y="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=12;" value="&lt;b&gt;3-a. 손목 카메라 오차 측정&lt;/b&gt;&#xa;ArUco 로 dx, dy, yaw 측정 → BoxTable.set_current(측정값)" vertex="1">
+                    <mxGeometry height="70" width="430" x="40" y="580" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=11;" value="&lt;b&gt;robot.measure_box()&lt;/b&gt;&#xa;manager/robot.py :106 — 현재는 더미 (0, 0, 0) 반환&#xa;RealCamera (OpenCV + ArUco) 미구현" vertex="1">
+                    <mxGeometry height="70" width="430" x="480" y="580" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#5a1210;fontSize=11;" value="&lt;b&gt;손목 카메라&lt;/b&gt; (USB)&#xa;modules/camera/camera.py — RealCamera" vertex="1">
+                    <mxGeometry height="70" width="430" x="920" y="580" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3b2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;3-b. Motion Planning — 경로 생성&lt;/b&gt;&#xa;4단계: 집기 → 이송 자세 → 레일 → 놓기&#xa;Plan(approach, carry, retreat) 반환" vertex="1">
+                    <mxGeometry height="78" width="430" x="40" y="670" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3b2b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Sequencer.plan(i, goal, size)&lt;/b&gt;&#xa;modules/arm/sequence.py :150&#xa;_tpl() → _check()&#xa;IK·충돌: modules/arm/stacking.py&#xa;편집 가능한 규칙: modules/arm/rules.py" vertex="1">
+                    <mxGeometry height="78" width="430" x="480" y="670" as="geometry"/>
+                </mxCell>
+                <mxCell id="s3b2c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" value="— (순수 계산)" vertex="1">
+                    <mxGeometry height="78" width="430" x="920" y="670" as="geometry"/>
+                </mxCell>
+                <mxCell id="sxa" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=13;fontStyle=1;" value="&lt;b&gt;실행 — skills.pick_and_place&lt;/b&gt;&#xa;manager/skills.py" vertex="1">
+                    <mxGeometry height="52" width="430" x="40" y="768" as="geometry"/>
+                </mxCell>
+                <mxCell id="s4a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;4. 접근&lt;/b&gt;&#xa;현재 자세 → 투입 위치 위 (빈손)" vertex="1">
+                    <mxGeometry height="60" width="430" x="40" y="840" as="geometry"/>
+                </mxCell>
+                <mxCell id="s4b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;robot.follow(plan.approach)&lt;/b&gt;&#xa;manager/robot.py :82&#xa;rail.command(q[0]) + arm.command(q[1:7])  (타이밍 A)" vertex="1">
+                    <mxGeometry height="60" width="430" x="480" y="840" as="geometry"/>
+                </mxCell>
+                <mxCell id="s4c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;레일&lt;/b&gt; Arduino M&lt;mm&gt;  (✅)&#xa;&lt;b&gt;팔&lt;/b&gt; Piper CAN JointCtrl  (❌)" vertex="1">
+                    <mxGeometry height="60" width="430" x="920" y="840" as="geometry"/>
+                </mxCell>
+                <mxCell id="s5a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;5. 흡착 ON — 상자 집기&lt;/b&gt;&#xa;붙을 때까지 대기" vertex="1">
+                    <mxGeometry height="56" width="430" x="40" y="920" as="geometry"/>
+                </mxCell>
+                <mxCell id="s5b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;robot.suction_on()&lt;/b&gt;  →  suction.on()&#xa;modules/vacuum/suction.py (RealSuction.on → &#39;ON\n&#39;)" vertex="1">
+                    <mxGeometry height="56" width="430" x="480" y="920" as="geometry"/>
+                </mxCell>
+                <mxCell id="s5c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;솔레노이드 밸브&lt;/b&gt;&#xa;Arduino D7 LOW-Trigger 릴레이" vertex="1">
+                    <mxGeometry height="56" width="430" x="920" y="920" as="geometry"/>
+                </mxCell>
+                <mxCell id="s6a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;6. 반송 (carry)&lt;/b&gt;&#xa;lifting → aligning → rotating → MV_POS → 레일 이동 → 내리기·밀어넣기 → 놓기" vertex="1">
+                    <mxGeometry height="80" width="430" x="40" y="996" as="geometry"/>
+                </mxCell>
+                <mxCell id="s6b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;robot.follow(plan.carry, box_follow=...)&lt;/b&gt;&#xa;sim: box_follow 가 상자를 공구에 붙여 시각화&#xa;MV_CUP_POS = 0.47 m (modules/arm/stacking.py :44)&#xa;레일 명령: &#39;0~1000 mm&#39; 아두이노 좌표" vertex="1">
+                    <mxGeometry height="80" width="430" x="480" y="996" as="geometry"/>
+                </mxCell>
+                <mxCell id="s6c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;레일&lt;/b&gt; + &lt;b&gt;팔&lt;/b&gt; 동시&#xa;Arduino + Piper CAN&#xa;(레일 ✅, 팔 ❌)" vertex="1">
+                    <mxGeometry height="80" width="430" x="920" y="996" as="geometry"/>
+                </mxCell>
+                <mxCell id="s7a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;7. 흡착 OFF&lt;/b&gt;&#xa;상자 분리" vertex="1">
+                    <mxGeometry height="56" width="430" x="40" y="1096" as="geometry"/>
+                </mxCell>
+                <mxCell id="s7b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;robot.suction_off()&lt;/b&gt;  →  suction.off()&#xa;Arduino &#39;OFF\n&#39; → 밸브 비활성" vertex="1">
+                    <mxGeometry height="56" width="430" x="480" y="1096" as="geometry"/>
+                </mxCell>
+                <mxCell id="s7c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;솔레노이드 밸브&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="56" width="430" x="920" y="1096" as="geometry"/>
+                </mxCell>
+                <mxCell id="s8a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;8. 후퇴 (retreat) + 레일 0 복귀&lt;/b&gt;&#xa;놓은 자세 → MV_POS → 투입 자세&#xa;(현재: retreat path 가 담당, home() 명시 선택)" vertex="1">
+                    <mxGeometry height="76" width="430" x="40" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="s8b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;robot.follow(plan.retreat)&lt;/b&gt;&#xa;(선택) robot.rail.home()  → Arduino &#39;HOME\n&#39;" vertex="1">
+                    <mxGeometry height="76" width="430" x="480" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="s8c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;레일&lt;/b&gt; + &lt;b&gt;팔&lt;/b&gt;&#xa;(레일 ✅, 팔 ❌)" vertex="1">
+                    <mxGeometry height="76" width="430" x="920" y="1172" as="geometry"/>
+                </mxCell>
+                <mxCell id="s9a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;9. BoxTable 갱신 → 다음 상자 반복&lt;/b&gt;&#xa;table.done(id): current = goal, state = placed" vertex="1">
+                    <mxGeometry height="56" width="430" x="40" y="1268" as="geometry"/>
+                </mxCell>
+                <mxCell id="s9b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;table.done(box_id)&lt;/b&gt;  →  main.py for 루프 다음 iteration" vertex="1">
+                    <mxGeometry height="56" width="430" x="480" y="1268" as="geometry"/>
+                </mxCell>
+                <mxCell id="s9c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" value="—" vertex="1">
+                    <mxGeometry height="56" width="430" x="920" y="1268" as="geometry"/>
+                </mxCell>
+                <mxCell id="loop_back" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1390" y="1296"/>
+                            <mxPoint x="1390" y="520"/>
+                            <mxPoint x="480" y="520"/>
+                        </Array>
+                        <mxPoint x="1350" y="1296" as="sourcePoint"/>
+                        <mxPoint x="1420" y="1296" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="loop_back_label" parent="1" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;fontSize=11;fontColor=#9a7d00;" value="다음 상자" vertex="1">
+                    <mxGeometry height="20" width="60" x="1360" y="860" as="geometry"/>
+                </mxCell>
+                <mxCell id="e01" edge="1" parent="1" source="s0a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s1a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e12" edge="1" parent="1" source="s1a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s_box">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e23" edge="1" parent="1" source="s2a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s3a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e34" edge="1" parent="1" source="s3a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s3b2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e45" edge="1" parent="1" source="s3b2" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="sxa">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e56" edge="1" parent="1" source="sxa" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s4a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e67" edge="1" parent="1" source="s4a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s5a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e78" edge="1" parent="1" source="s5a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s6a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e89" edge="1" parent="1" source="s6a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s7a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9a" edge="1" parent="1" source="s7a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s8a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="eab" edge="1" parent="1" source="s8a" style="edgeStyle=none;html=1;strokeColor=#444444;strokeWidth=1.5;endArrow=block;endFill=1;" target="s9a">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" value="&lt;b&gt;장치 레이어 — 추상화&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="28" width="260" x="1400" y="148" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_arm" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;Arm&lt;/b&gt;  modules/arm/arm.py&#xa;read(), command(q)&#xa;Sim: MuJoCo ctrl[1:7]  ✅&#xa;Real: Piper CAN  ❌&#xa;Dual: 둘 다 (팔 때문에 블록)" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="188" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_rail" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Rail&lt;/b&gt;  modules/rail/rail.py&#xa;read(), command(m), home()&#xa;Sim: MuJoCo ctrl[0]  ✅&#xa;Real: Arduino M/P/H  ✅&#xa;Dual: 둘 다  ✅" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="308" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_suc" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Suction&lt;/b&gt;  modules/vacuum/suction.py&#xa;on(), off(), holding()&#xa;Sim: 상태만 추적  ✅&#xa;Real: Arduino ON/OFF  ✅&#xa;Dual: 둘 다  ✅" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="428" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_cam" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;Camera&lt;/b&gt;  modules/camera/camera.py&#xa;frame(), markers()&#xa;Sim: MuJoCo 렌더  ✅&#xa;Real: OpenCV + ArUco  ❌&#xa;Dual: 둘 다 (카메라 때문에 블록)" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="548" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_ard" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Arduino (공유 시리얼)&lt;/b&gt;&#xa;manager/arduino.py — Arduino.send()&#xa;펌웨어: modules/rail_vacuum.ino&#xa;프로토콜: M/P/H, ON/OFF, POS, STOP&#xa;115200 baud, ASCII" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="668" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_rob" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Robot&lt;/b&gt;  manager/robot.py&#xa;네 장치 묶음 (DualArm, DualRail, DualSuction, DualCamera)&#xa;.sim / .real / .dual 팩토리&#xa;follow(wps), suction_on/off(), state(), stop()" vertex="1">
+                    <mxGeometry height="110" width="260" x="1400" y="788" as="geometry"/>
+                </mxCell>
+                <mxCell id="hw_entry" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;엔트리&lt;/b&gt;  manager/main.py&#xa;--mode sim | real | dual&#xa;--port /dev/tty.usbmodem*&#xa;--can can0" vertex="1">
+                    <mxGeometry height="92" width="260" x="1400" y="908" as="geometry"/>
+                </mxCell>
+                <mxCell id="pass" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" value="&lt;b&gt;Pass-through 레일 명령 (타이밍 A)&lt;/b&gt;&#xa;rail.command(m) → Arduino &#39;M&lt;mm&gt;&#39;&#xa;MOVE 중 새 MOVE 는 Arduino 가 &#39;ERROR busy&#39; 로 거부 → RealRail 이 조용히 무시, 다음 호출에 최신 목표로 따라감." vertex="1">
+                    <mxGeometry height="90" width="260" x="1400" y="1020" as="geometry"/>
+                </mxCell>
+                <mxCell id="defer" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" value="&lt;b&gt;좌표계 통일 (후속 작업)&lt;/b&gt;&#xa;현재: Sequencer 는 MuJoCo 좌표, RealRail(zero_offset_m=-0.49) 로 Arduino 0-1000 mm 와 연결.&#xa;추후: &quot;컨테이너 좌표계&quot; 로 모든 상수(ORIGIN, PICK_XY, KEEPOUT_X) 정비 예정." vertex="1">
+                    <mxGeometry height="130" width="260" x="1400" y="1120" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>

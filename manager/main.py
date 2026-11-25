@@ -25,7 +25,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-sys.path.insert(0, str(ROOT / "modules" / "mp"))
+sys.path.insert(0, str(ROOT / "modules" / "arm"))
 
 from sequence import BOXES, Sequencer                 # noqa: E402
 from stacking import ORIGIN, set_view                 # noqa: E402

@@ -6,7 +6,7 @@
   command(m)    -> 목표 위치 보내기
   home()        -> 원점(0.0) 으로 복귀
 
-범위는 MuJoCo 모델 (modules/mp/model/manibox_modified.xml:165) 의 조인트 range 와 같다: −0.49 ~ +0.51 m.
+범위는 MuJoCo 모델 (modules/arm/model/manibox_modified.xml:165) 의 조인트 range 와 같다: −0.49 ~ +0.51 m.
 """
 from __future__ import annotations
 
