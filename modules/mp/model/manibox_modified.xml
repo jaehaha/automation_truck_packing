@@ -1,0 +1,255 @@
+<!-- ManiBox R16 시뮬레이션 모델. 프레임 기둥 +200mm, 그리퍼 대신 직접 설계한 흡착 공구(assets/tool/suction_tool_ABC.stl). 손으로 고쳐 쓰는 파일이다. -->
+<mujoco model="manibox_r16_tall">
+  <compiler angle="radian" meshdir="../assets" autolimits="true"/>
+  <option timestep="0.002" integrator="implicitfast" cone="elliptic" impratio="10"/>
+  <size memory="64M"/>
+
+  <visual>
+    <global offwidth="1280" offheight="670" azimuth="-31.13" elevation="-1.67"/>
+    <headlight ambient="0.35 0.35 0.35" diffuse="0.6 0.6 0.6" specular="0.1 0.1 0.1"/>
+    <quality shadowsize="4096"/>
+  </visual>
+  <!-- 뷰어를 열었을 때의 시점이 아래 카메라 "view" 와 같아지도록 맞춘 값 (거리 = 1.5 x extent) -->
+  <statistic center="0.800 0.316 0.273" extent="1.419"/>
+
+  <default>
+    <!-- 충돌 비트: 1=프레임/바닥/물체, 2=캐리지, 4=팔. 프레임과 캐리지는 서로 충돌하지 않는다(레일 위를 미끄러짐). -->
+    <default class="visual">
+      <geom type="mesh" contype="0" conaffinity="0" group="2" density="0"/>
+    </default>
+    <default class="frame_col">
+      <geom contype="1" conaffinity="0" group="3" rgba="0.3 0.6 0.9 0.3"/>
+    </default>
+    <default class="carriage_col">
+      <geom contype="2" conaffinity="0" group="3" rgba="0.9 0.6 0.3 0.3"/>
+    </default>
+    <default class="arm">
+      <geom type="mesh" contype="4" conaffinity="7" group="2" rgba="0.85 0.86 0.88 1"/>
+      <default class="arm_big">
+        <joint axis="0 0 1" armature="0.1" damping="2" frictionloss="0.1"/>
+        <position kp="300" kv="30" forcerange="-100 100"/>
+      </default>
+      <default class="arm_small">
+        <joint axis="0 0 1" armature="0.05" damping="1" frictionloss="0.05"/>
+        <position kp="100" kv="6" forcerange="-30 30"/>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.75 0.8 0.86" rgb2="0.2 0.24 0.3" width="256" height="1536"/>
+    <texture name="grid" type="2d" builtin="checker" rgb1="0.82 0.82 0.8" rgb2="0.72 0.72 0.7" width="256" height="256" mark="edge" markrgb="0.5 0.5 0.5"/>
+    <material name="floor" texture="grid" texrepeat="4 4" texuniform="true" reflectance="0.05"/>
+    <material name="aluminum" rgba="0.72 0.74 0.77 1" specular="0.4" shininess="0.5"/>
+    <material name="board_white" rgba="0.96 0.96 0.94 1" specular="0.05" shininess="0.05"/>
+    <material name="board_gray" rgba="0.55 0.56 0.58 1" specular="0.05" shininess="0.05"/>
+    <material name="carriage" rgba="0.3 0.33 0.38 1" specular="0.3" shininess="0.4"/>
+    <mesh name="frame" file="meshes/frame_tall.stl"/>
+    <mesh name="carriage" file="meshes/carriage.stl"/>
+    <mesh name="base_link" file="piper/base_link.stl"/>
+    <mesh name="link1" file="piper/link1.stl"/>
+    <mesh name="link2" file="piper/link2.stl"/>
+    <mesh name="link3" file="piper/link3.stl"/>
+    <mesh name="link4" file="piper/link4.stl"/>
+    <mesh name="link5" file="piper/link5.stl"/>
+    <mesh name="link6" file="piper/link6.stl"/>
+    <mesh name="flange" file="piper/flange.stl"/>
+    <mesh name="gripper_body" file="piper/gripper_body.stl"/>
+    <mesh name="suction_tool" file="tool/suction_tool_ABC.stl"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0.800 -0.6 1.6" dir="0 0.4 -1" diffuse="0.5 0.5 0.5" castshadow="true"/>
+    <geom name="floor" type="plane" size="3 3 0.05" material="floor" contype="1" conaffinity="0"/>
+    <!-- view: 기본 시점. 뷰어와 영상이 모두 이 시점을 쓴다. -->
+    <camera name="view" pos="-1.022 1.417 0.335" xyaxes="-0.517 -0.856 0.000 0.025 -0.015 1.000"/>
+    <camera name="overview" pos="1.700 -1.5 1.05" xyaxes="0.86 0.5 0 -0.2 0.34 0.92"/>
+    <camera name="front" pos="0.800 -1.6 0.3" xyaxes="1 0 0 0 0 1"/>
+
+    <geom name="frame_visual" class="visual" mesh="frame" material="aluminum"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.02000 0.02000" size="0.76000 0.02000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.02000 0.31000" size="0.02000 0.02000 0.31000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.02000 0.31000" size="0.02000 0.02000 0.31000"/>
+    <geom class="frame_col" type="box" pos="0.06000 0.02000 0.04300" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.04300 0.02000 0.06000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.06000 0.02000 0.61700" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.04300 0.02000 0.60000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.54000 0.02000 0.04300" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.55700 0.02000 0.06000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.54000 0.02000 0.61700" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.55700 0.02000 0.60000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.54000 0.02000" size="0.76000 0.02000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.54000 0.31000" size="0.02000 0.02000 0.31000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.54000 0.31000" size="0.02000 0.02000 0.31000"/>
+    <geom class="frame_col" type="box" pos="0.06000 0.54000 0.04300" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.04300 0.54000 0.06000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.06000 0.54000 0.61700" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.04300 0.54000 0.60000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.54000 0.54000 0.04300" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.55700 0.54000 0.06000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.54000 0.54000 0.61700" size="0.02000 0.01750 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.55700 0.54000 0.60000" size="0.00300 0.01750 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.28000 0.02000" size="0.02000 0.24000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.28000 0.66000" size="0.02000 0.24000 0.04000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.06000 0.04300" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.04300 0.06000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.06000 0.61700" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.04300 0.60000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.50000 0.04300" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.51700 0.06000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.50000 0.61700" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="0.02000 0.51700 0.60000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.28000 0.02000" size="0.02000 0.24000 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.28000 0.66000" size="0.02000 0.24000 0.04000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.06000 0.04300" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.04300 0.06000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.06000 0.61700" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.04300 0.60000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.50000 0.04300" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.51700 0.06000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.50000 0.61700" size="0.01750 0.02000 0.00300"/>
+    <geom class="frame_col" type="box" pos="1.58000 0.51700 0.60000" size="0.01750 0.00300 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.54000 0.28000 0.02000" size="0.02000 0.24000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.58000 0.04300 0.02000" size="0.02000 0.00300 0.01750"/>
+    <geom class="frame_col" type="box" pos="0.56300 0.06000 0.02000" size="0.00300 0.02000 0.01750"/>
+    <geom class="frame_col" type="box" pos="0.58000 0.51700 0.02000" size="0.02000 0.00300 0.01750"/>
+    <geom class="frame_col" type="box" pos="0.56300 0.50000 0.02000" size="0.00300 0.02000 0.01750"/>
+    <geom class="frame_col" type="box" pos="1.06000 0.28000 0.02000" size="0.02000 0.24000 0.02000"/>
+    <geom class="frame_col" type="box" pos="1.10000 0.04300 0.02000" size="0.02000 0.00300 0.01750"/>
+    <geom class="frame_col" type="box" pos="1.08300 0.06000 0.02000" size="0.00300 0.02000 0.01750"/>
+    <geom class="frame_col" type="box" pos="1.10000 0.51700 0.02000" size="0.02000 0.00300 0.01750"/>
+    <geom class="frame_col" type="box" pos="1.08300 0.50000 0.02000" size="0.00300 0.02000 0.01750"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.02000 0.70000" size="0.80000 0.02000 0.08000"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.54000 0.70000" size="0.80000 0.02000 0.08000"/>
+    <geom class="frame_col" type="box" pos="0.07000 0.02000 0.78600" size="0.02000 0.02000 0.00600"/>
+    <geom class="frame_col" type="box" pos="1.35000 0.02000 0.78600" size="0.02000 0.02000 0.00600"/>
+    <geom class="frame_col" type="box" pos="0.07000 0.54000 0.78600" size="0.02000 0.02000 0.00600"/>
+    <geom class="frame_col" type="box" pos="1.35000 0.54000 0.78600" size="0.02000 0.02000 0.00600"/>
+    <geom class="frame_col" type="box" pos="0.71000 0.02000 0.78875" size="0.62000 0.01000 0.00875"/>
+    <geom class="frame_col" type="box" pos="0.71000 0.54000 0.78875" size="0.62000 0.01000 0.00875"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.23300 0.72000" size="0.80000 0.01000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.80000 0.26300 0.72000" size="0.80000 0.01000 0.02000"/>
+    <geom class="frame_col" type="box" pos="0.27000 0.23300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.27000 0.26300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.57000 0.23300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.57000 0.26300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.87000 0.23300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.87000 0.26300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="1.15000 0.23300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="1.15000 0.26300 0.72100" size="0.00200 0.00200 0.03000"/>
+    <geom class="frame_col" type="box" pos="0.71000 0.24800 0.75800" size="0.53800 0.02600 0.01000"/>
+    <geom class="frame_col" type="box" pos="0.15100 0.24800 0.76900" size="0.02100 0.02600 0.02100"/>
+    <geom class="frame_col" type="box" pos="1.26900 0.24800 0.76900" size="0.02100 0.02600 0.02100"/>
+    <geom class="frame_col" type="box" pos="0.71000 0.24800 0.77000" size="0.53800 0.00600 0.00100"/>
+    <geom class="frame_col" type="box" pos="1.26900 0.28800 0.76900" size="0.02100 0.01400 0.02100"/>
+    <geom class="frame_col" type="box" pos="1.26900 0.30600 0.76800" size="0.02800 0.00400 0.02800"/>
+    <geom class="frame_col" type="box" pos="1.26900 0.33400 0.76800" size="0.02700 0.02400 0.02700"/>
+    <geom class="frame_col" type="box" pos="1.26900 0.36200 0.76800" size="0.02800 0.00400 0.02800"/>
+    <geom class="frame_col" type="box" pos="1.24500 0.33400 0.76800" size="0.00100 0.02300 0.02600"/>
+    <geom class="frame_col" type="box" pos="1.29300 0.33400 0.76800" size="0.00100 0.02300 0.02600"/>
+
+    <!-- 바닥판(하드보드지 자리): 하단 프레임 위에 얹은 두께 3mm 판 3장. 가로대(x=0.54, 1.06) 중심에서 나뉜다.
+         팔이 home 일 때 joint3(팔꿈치, x≈0.42)이 있는 -x 쪽 칸이 흰색, 나머지 두 칸은 회색. 팔과 충돌한다.
+         벽과 같은 group 1 이라 뷰어에서 숫자 1 키(또는 왼쪽 패널 Group enable > Geom 1)로 함께 켜고 끈다. -->
+    <geom name="board_1" type="box" pos="0.290 0.280 0.0415" size="0.250 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
+    <geom name="board_2" type="box" pos="0.800 0.280 0.0415" size="0.260 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
+    <geom name="board_3" type="box" pos="1.310 0.280 0.0415" size="0.250 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
+    <!-- 벽(회색 하드보드지, 두께 3mm): 프레임 바깥면에 붙인다. 넓은 양쪽 면(y=0, y=0.56)과 공구가 바라보는 +x 끝면(x=1.6).
+         group 1 이라 뷰어에서 숫자 1 키(또는 왼쪽 패널 Group enable > Geom 1)로 켜고 끈다. -->
+    <geom name="wall_front" type="box" pos="0.800 -0.0015 0.390" size="0.800 0.0015 0.390" material="board_gray" contype="1" conaffinity="0" group="1"/>
+    <geom name="wall_back" type="box" pos="0.800 0.5615 0.390" size="0.800 0.0015 0.390" material="board_gray" contype="1" conaffinity="0" group="1"/>
+    <geom name="wall_end" type="box" pos="1.6015 0.280 0.350" size="0.0015 0.283 0.350" material="board_gray" contype="1" conaffinity="0" group="1"/>
+
+    <body name="carriage" pos="0.7000 0.2800 0.6720">
+      <inertial pos="0 0 0.08" mass="3.5" diaginertia="0.09 0.03 0.11"/>
+      <joint name="rail" type="slide" axis="1 0 0" range="-0.49 0.51" armature="1" damping="50" frictionloss="2"/>
+      <geom name="carriage_visual" class="visual" mesh="carriage" material="carriage"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 -0.26000 0.13175" size="0.03875 0.02200 0.00625"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 -0.27600 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 -0.24400 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="0.06200 -0.26000 0.13175" size="0.03875 0.02200 0.00625"/>
+      <geom class="carriage_col" type="box" pos="0.06200 -0.27600 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="0.06200 -0.24400 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 0.26000 0.13175" size="0.03875 0.02200 0.00625"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 0.24400 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 0.27600 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="0.06200 0.26000 0.13175" size="0.03875 0.02200 0.00625"/>
+      <geom class="carriage_col" type="box" pos="0.06200 0.24400 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="0.06200 0.27600 0.11905" size="0.03875 0.00600 0.00645"/>
+      <geom class="carriage_col" type="box" pos="0.00000 0.00000 0.00400" size="0.12000 0.15200 0.00400"/>
+      <geom class="carriage_col" type="box" pos="0.00000 -0.14800 0.07300" size="0.12000 0.00400 0.06500"/>
+      <geom class="carriage_col" type="box" pos="0.00000 0.14800 0.07300" size="0.12000 0.00400 0.06500"/>
+      <geom class="carriage_col" type="box" pos="-0.06200 0.00000 0.14400" size="0.02600 0.28400 0.00600"/>
+      <geom class="carriage_col" type="box" pos="0.06200 0.00000 0.14400" size="0.02600 0.28400 0.00600"/>
+      <geom class="carriage_col" type="box" pos="0.00000 -0.03200 0.11500" size="0.03000 0.03900 0.00300"/>
+      <geom class="carriage_col" type="box" pos="0.00000 -0.06850 0.10400" size="0.03000 0.00250 0.00800"/>
+      <geom class="carriage_col" type="box" pos="0.00000 0.00450 0.10400" size="0.03000 0.00250 0.00800"/>
+      <geom class="carriage_col" type="box" pos="0.04500 -0.03200 0.15300" size="0.05000 0.05000 0.00300"/>
+      <!-- 팔은 캐리지 판 아랫면에 뒤집혀(x축 180도) 장착된다. -->
+      <body name="piper_base" quat="0 1 0 0" childclass="arm">
+        <geom class="arm" mesh="base_link" mass="1.02" rgba="0.2 0.2 0.22 1"/>
+        <body name="link1" pos="0 0 0.123" quat="1 0 0 0" gravcomp="1">
+          <joint name="joint1" class="arm_big" range="-2.6179938 2.6179938"/>
+          <geom class="arm" mesh="link1" mass="0.71"/>
+          <body name="link2" pos="0 0 0" quat="0.0479709576 -0.0479709211 -0.705477695 -0.705477711" gravcomp="1">
+            <joint name="joint2" class="arm_big" range="0 3.1415926"/>
+            <geom class="arm" mesh="link2" mass="1.16"/>
+            <body name="link3" pos="0.28503 0 0" quat="0.62401599 0 0 -0.781411571" gravcomp="1">
+              <joint name="joint3" class="arm_big" range="-2.9670597 0"/>
+              <geom class="arm" mesh="link3" mass="0.5"/>
+              <body name="link4" pos="-0.02198 -0.25075 0" quat="0.707106791 0.707106772 0 0" gravcomp="1">
+                <joint name="joint4" class="arm_small" range="-1.7453292 1.7453292"/>
+                <geom class="arm" mesh="link4" mass="0.38"/>
+                <body name="link5" pos="0 0 0" quat="0.707106791 -0.707106772 0 0" gravcomp="1">
+                  <joint name="joint5" class="arm_small" range="-1.2217304 1.2217304"/>
+                  <geom class="arm" mesh="link5" mass="0.383"/>
+                  <body name="link6" pos="8.8259e-05 -0.091 0" quat="0.707106791 0.707106772 0 0" gravcomp="1">
+                    <joint name="joint6" class="arm_small" range="-2.0943951 2.0943951"/>
+                    <geom class="arm" mesh="link6" mass="0.007"/>
+                    <geom class="arm" mesh="flange" mass="0.04" rgba="0.2 0.2 0.22 1"/>
+                    <geom class="arm" mesh="gripper_body" pos="0 0 0.0045" mass="0.35" rgba="0.2 0.2 0.22 1"/>
+                    <!-- 직접 설계한 공구: A_clamp_cap + C_camera + B_5.5cm(길이 55mm 홀더) 를 조립한 한 덩어리(scripts/build_tool.py). 메시가 link6 좌표로 저장돼 있어 pos 가 필요 없다. -->
+                    <geom class="arm" mesh="suction_tool" mass="0.11" rgba="0.95 0.5 0.2 1"/>
+                    <!-- 흡착컵: 공구 끝면(z=0.1225)에 다는 벨로즈 흡착컵(Schmalz, 지름 약 20mm). 길이 25mm 는 가정값이라 실물에 맞춰 고칠 것.
+                         컵 길이를 바꾸면 size 의 두 번째 값(길이의 절반), pos 의 z, 아래 tcp 의 z 를 같이 바꾼다. -->
+                    <geom name="suction_cup" class="arm" type="cylinder" pos="0 0 0.1350" size="0.010 0.0125" mass="0.01" rgba="0.35 0.80 0.50 1"/>
+                    <!-- tcp: 흡착컵 끝면 중심. 상자에 닿는 점이다. -->
+                    <site name="tcp" pos="0 0 0.1475" size="0.006" rgba="1 0.2 0.2 0.6" group="4"/>
+                    <!-- wrist: C_camera 받침의 카메라 자리(축에서 56.5mm). 공구 끝 방향(+z)을 본다. -->
+                    <camera name="wrist" pos="-0.0565 0 0.0735" xyaxes="0 1 0 1 0 0" fovy="70"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <!-- 공식 PiPER MoveIt SRDF에서 충돌 검사를 끄는 쌍 -->
+    <exclude body1="piper_base" body2="link2"/>
+    <exclude body1="link1" body2="link3"/>
+    <exclude body1="link2" body2="link4"/>
+    <exclude body1="link3" body2="link5"/>
+    <exclude body1="link4" body2="link6"/>
+  </contact>
+
+  <actuator>
+    <position name="rail" joint="rail" kp="20000" kv="1200" ctrlrange="-0.49 0.51" forcerange="-600 600"/>
+    <position name="joint1" joint="joint1" class="arm_big" ctrlrange="-2.6179938 2.6179938"/>
+    <position name="joint2" joint="joint2" class="arm_big" ctrlrange="0 3.1415926"/>
+    <position name="joint3" joint="joint3" class="arm_big" ctrlrange="-2.9670597 0"/>
+    <position name="joint4" joint="joint4" class="arm_small" ctrlrange="-1.7453292 1.7453292"/>
+    <position name="joint5" joint="joint5" class="arm_small" ctrlrange="-1.2217304 1.2217304"/>
+    <position name="joint6" joint="joint6" class="arm_small" ctrlrange="-2.0943951 2.0943951"/>
+  </actuator>
+
+  <keyframe>
+    <!-- qpos/ctrl 순서: rail, joint1..6 -->
+    <key name="home" qpos="0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0"/>
+    <!-- ready: 레일 전 구간에서 프레임과 닿지 않으면서 그리퍼를 아래로 약 50도 기울인 자세 -->
+    <key name="ready" qpos="0 0 0.3 0 0 -1.1 0" ctrl="0 0 0.3 0 0 -1.1 0"/>
+  </keyframe>
+</mujoco>
