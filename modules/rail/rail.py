@@ -51,16 +51,18 @@ class SimRail(Rail):
 
 class RealRail(Rail):
     """실물: modules/rail_vacuum.ino 펌웨어가 올라간 공유 아두이노를 쓴다.
-    아두이노 좌표는 0 ~ 1000 mm, 우리 좌표는 -0.49 ~ +0.51 m. 둘 다 총 1000 mm 폭이라 평행이동만 한다:
+    아두이노 좌표는 0 ~ 1000 mm, Rail API 좌표는 Rail.RANGE (−0.49 ~ +0.51 m, RC 기준).
 
-        우리 m  = (아두이노 mm) / 1000 + zero_offset_m
-        아두이노 mm = (우리 m - zero_offset_m) * 1000
+    두 좌표계의 매핑은 modules/transform/transform.py 의 RAIL_ZERO_CF_X 를 거쳐 통일한다. 다만 지금 Sequencer
+    는 아직 MuJoCo/RC 좌표로 돌아가므로 과도기에 호환 매개변수 `zero_offset_m` 로 평행이동만 한다.
 
-    zero_offset_m 기본값 -0.49 는 "레일이 최저 끝 (= 우리 -490 mm) 에 있을 때 INITIALIZE 했다" 는 전제.
-    실제 조립에서 다르면 생성 시 바꿔 준다.
+        RC m = (Arduino mm) / 1000 + zero_offset_m
+        Arduino mm = (RC m - zero_offset_m) * 1000
 
-    타이밍 A: MOVE 도중 새 MOVE 가 들어오면 아두이노가 "busy" 로 거부함. 이걸 조용히 무시해서
-    시뮬은 최신 명령으로 즉시 반영하고, 실물은 현재 이동이 끝난 뒤 다음 들어오는 MOVE 를 따라간다."""
+    컨테이너 좌표계로 완전 통일되면 이 변환은 frame.rail_mm_to_cf_x / cf_x_to_rail_mm 로 대체한다.
+
+    타이밍 A: MOVE 도중 새 MOVE 는 아두이노가 "busy" 로 거부 → 조용히 무시 → 다음 호출로 따라감.
+    """
 
     def __init__(self, arduino, zero_offset_m: float = -0.49, auto_init: bool = True):
         self.arduino = arduino

@@ -126,6 +126,24 @@ class Robot:
                     self.on_step()
                 time.sleep(0.02 / max(speed, 1e-3))
 
-    def measure_box(self) -> tuple[float, float, float]:
-        """손목 카메라로 상자 측정: (dx, dy, yaw). 지금은 더미값. TODO: ArUco."""
-        return (0.0, 0.0, 0.0)
+    def measure_box(self, expected_cf_xy: tuple[float, float] | None = None) -> tuple[float, float, float]:
+        """손목 카메라로 상자 측정. 반환: (dx, dy, yaw) — Container Frame 기준 오차.
+
+        expected_cf_xy: 상자가 "원래 있어야 할" CF 위치 (x, y). 지정 안 하면 (0, 0) 기준.
+        카메라 없음·마커 못 봄 → (0, 0, 0) 반환 (sim 모드 호환).
+        """
+        if self.camera is None:
+            return (0.0, 0.0, 0.0)
+        try:
+            markers = self.camera.markers()
+        except Exception:
+            return (0.0, 0.0, 0.0)
+        if not markers:
+            return (0.0, 0.0, 0.0)
+        # 가장 신뢰할 수 있는 (크기가 큰) 마커 하나 사용 — 지금은 첫 번째
+        _mid, xyz_cf, yaw = markers[0]
+        if expected_cf_xy is None:
+            expected_cf_xy = (0.0, 0.0)
+        dx = float(xyz_cf[0] - expected_cf_xy[0])
+        dy = float(xyz_cf[1] - expected_cf_xy[1])
+        return (dx, dy, yaw)

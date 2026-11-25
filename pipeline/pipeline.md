@@ -3,68 +3,106 @@
 Packing Model 이 정한 순서대로 상자를 하나씩 집어 적재하고, 끝날 때마다 상자 표를 갱신한다.
 도식: [`pipeline.drawio`](pipeline.drawio).
 
-## 상태 표기
-
-- 🟢 **완료** — sim 모드에서 지금 바로 돌아감
-- 🟡 **부분** — sim 은 OK, real 은 추가 작업 필요 (또는 더미값)
-- 🔴 **미구현** — 뼈대만 있음
-
 ## 사전 (한 번만)
 
-| 단계 | 하는 일 | 호출 지점 | 상태 |
-|---|---|---|---|
-| 0 | 상자 시퀀스 입력 | `manager/main.py` `load_manifest()` | 🟢 |
-| 1 | Packing Model — 각 상자의 goal 결정 | `modules/packing/plan_moves.py` (사전 생성된 `moves_big.json` 로드) | 🟢 |
-| — | BoxTable 초기화 (`id → {size, current, goal, state}`) | `manager/boxes.py` | 🟢 |
+| 단계 | 하는 일 |
+|---|---|
+| 0 | 상자 시퀀스 입력 |
+| 1 | Packing Model → 각 상자의 goal 결정 (순서대로) |
+| — | BoxTable 초기화 (`id → {size, current, goal, state}`) |
 
-## LOOP (상자 하나씩, `main.py` for)
+## LOOP (상자 하나씩)
 
-| 단계 | 하는 일 | 호출 지점 | 하드웨어 | 상태 |
-|---|---|---|---|---|
-| 2 | 사람이 투입 (수동) 위치 (85, 240), ArUco 마커 위 | 코드 X — `PICK_XY` 가 참조 좌표 | 사람 | 🟡 |
-| 3-a | 손목 카메라로 오차 측정 → BoxTable.current 보정 | `robot.measure_box()` (현재 더미) | 손목 카메라 | 🔴 |
-| 3-b | Motion Planning — `Plan(approach, carry, retreat)` | `Sequencer.plan()` (`modules/arm/sequence.py`) | — | 🟢 |
-| 4 | 접근 — 투입 위치 위로 (빈손) | `robot.follow(plan.approach)` | 레일 🟢 + 팔 🔴 | 🟡 |
-| 5 | 흡착 ON — 상자 집기 | `robot.suction_on()` → Arduino `ON` | 솔레노이드 | 🟢 |
-| 6 | 반송 (carry) — MV_POS 거쳐 적재 자리로 | `robot.follow(plan.carry)` | 레일 🟢 + 팔 🔴 | 🟡 |
-| 7 | 흡착 OFF — 상자 분리 | `robot.suction_off()` → Arduino `OFF` | 솔레노이드 | 🟢 |
-| 8 | 후퇴 + 레일 0 복귀 | `robot.follow(plan.retreat)` | 레일 🟢 + 팔 🔴 | 🟡 |
-| 9 | BoxTable 갱신 → 다음 상자 | `table.done(id)` | — | 🟢 |
+각 줄 오른쪽 괄호는 해당 함수의 구현 위치. `//demo` = 사용자가 궤적을 녹화해서 저장할 함수. 괄호 안 인자는 상황별 분기.
 
-4·6·8 은 레일 쪽은 끝났고 **`RealArm` 만 채우면 전부 초록** 으로 바뀜.
+### Packing  — 전체 사이클: [`pack_one()`](../manager/skills.py#L149)
 
-## 장치 레이어 (`modules/<device>/`)
+0. 시작: 파이퍼 = mv_pos, rail(0) 이 규칙 (초기 자세)
+1. 사람이 정해진 위치에 대충 중심 맞춰서 상자 투입 (수동)
+2. `approach_to_buffer()` //demo 호출 — 박스 위로 이동 ([manager/skills.py:66](../manager/skills.py#L66))
+3. `alignment(pack)` — wrist 캠 ArUco 로 ALIGN 위치로 IK 미세 조정 ([manager/skills.py:73](../manager/skills.py#L73))
+4. `grip(pack)` — 정한 z offset 만큼 내려가서 흡착 ON ([manager/skills.py:96](../manager/skills.py#L96))
+5. `mv_pos()` //demo 호출 — 레일 이동 자세 ([manager/skills.py:60](../manager/skills.py#L60))
+6. `rail(x)` — 상자 x 를 규칙으로 변환해 아두이노 레일 이동 ([manager/skills.py:115](../manager/skills.py#L115))
+7. `approach_to_box(pack)` — yz 로 자세 맞춘 뒤 x 방향으로 놓기 ([manager/skills.py:129](../manager/skills.py#L129))
+8. `un_grip()` — 그리퍼 끄기 ([manager/skills.py:110](../manager/skills.py#L110))
+9. `mv_pos()` //demo 호출 — 레일 이동 자세 ([manager/skills.py:60](../manager/skills.py#L60))
+10. `rail(0)` — 다음 상자 적재 준비 — `robot.rail.command(0.0)`
 
-| 장치 | Sim | Real | 파일 |
-|---|---|---|---|
-| Arm | 🟢 MuJoCo ctrl[1:7] | 🔴 Piper CAN | `arm/arm.py` |
-| Rail | 🟢 MuJoCo ctrl[0] | 🟢 Arduino M/P/H | `rail/rail.py` |
-| Suction | 🟢 상태 추적 | 🟢 Arduino ON/OFF | `vacuum/suction.py` |
-| Camera | 🟢 MuJoCo 렌더 | 🔴 OpenCV + ArUco | `camera/camera.py` |
+다시 2번으로 이동.
 
-- **공유 Arduino**: `manager/arduino.py` — 레일·밸브가 한 보드에 물려 있음. 프로토콜: M/P/H, ON/OFF, POS, STOP (115200 ASCII)
-- **Robot**: `manager/robot.py` — 네 장치 묶어 `.sim / .real / .dual` 팩토리와 `follow / suction_on/off / state / stop` 노출
+### UnPacking  — 전체 사이클: [`unpack_one()`](../manager/skills.py#L163)
 
-## 모드별 실행
+0. 시작: 파이퍼 = mv_pos, rail(0) 이 규칙
+1. `rail(x)` — BoxTable 에 저장된 x 로 레일 이동 ([manager/skills.py:115](../manager/skills.py#L115))
+2. `approach_to_box(unpack)` — yz 로 자세 맞춘 뒤 정해진 x 로 이동 ([manager/skills.py:129](../manager/skills.py#L129))
+3. `alignment(unpack)` — wrist 캠으로 출구 보이는 상자면에 정해진 x offset 으로 IK ([manager/skills.py:73](../manager/skills.py#L73))
+4. `grip(unpack)` — 정한 x offset 만큼 이동해서 흡착 ON ([manager/skills.py:96](../manager/skills.py#L96))
+5. `mv_pos()` //demo 호출 — 레일 이동 자세 ([manager/skills.py:60](../manager/skills.py#L60))
+6. `rail(0)` — `robot.rail.command(0.0)`
+7. `approach_to_buffer()` //demo 호출 — 투입 공간 위로 이동 ([manager/skills.py:66](../manager/skills.py#L66))
+8. `put_to_buffer()` — BoxTable 의 상자 size 참고해 z offset 맞춤 ([manager/skills.py:141](../manager/skills.py#L141))
+9. `un_grip()` — 그리퍼 끄기 ([manager/skills.py:110](../manager/skills.py#L110))
+10. `mv_pos()` //demo 호출 — 레일 이동 자세 ([manager/skills.py:60](../manager/skills.py#L60))
 
-```bash
-cd manager
-mjpython main.py --mode sim                     # 시뮬 + 뷰어
-python  main.py --mode sim --no-view            # 시뮬 계획만
-mjpython main.py --mode dual --port /dev/tty.usbmodemXXXX   # 실물+시뮬 (디지털 트윈)
-python  main.py --mode real --port /dev/tty.usbmodemXXXX    # 실물만
-```
+다시 1번 반복 (버퍼에 둔 상자는 사람이 바로 뺀다고 가정).
 
-| 모드 | 명령 전송 | read | 뷰어 |
-|---|---|---|---|
-| sim | Sim* → MuJoCo | MuJoCo | mjpython |
-| real | Real* → CAN + Arduino | 하드웨어 | 없음 |
-| dual | Dual* = 실물 + 시뮬 | **실물** | mjpython (시뮬=거울) |
+## 사용자가 완성해야 할 것 — 단계별
+
+### A. 데모 녹화 ([manager/demos/](../manager/demos/))
+`//demo` 가 붙은 함수들은 사용자 녹화 궤적/자세를 쓴다. 각각 `.npz` 파일로 저장. 포맷: `np.savez(path, waypoints=np.ndarray[N, 7])` — 각 행이 `[rail, j1..j6]`.
+
+- [ ] `manager/demos/mv_pos.npz` — 레일 이동 자세 (1자세 또는 짧은 궤적)
+- [ ] `manager/demos/approach_to_buffer.npz` — 아무 데서나 투입 공간 위까지의 궤적
+
+### B. offset 상수 ([manager/skills.py:33-44](../manager/skills.py#L33-L44))
+alignment / grip / approach / put 의 미세 오프셋. 실측으로 조정.
+
+- [ ] `ALIGN_OFFSET_PACK_Z` — 집기 직전 상자 윗면 위에 떠 있을 거리 ([L33](../manager/skills.py#L33))
+- [ ] `ALIGN_OFFSET_UNPACK_X` — 꺼내기 직전 상자 옆면 앞에 떠 있을 거리 ([L34](../manager/skills.py#L34))
+- [ ] `GRIP_APPROACH_PACK_Z` — 흡착 ON 전에 z 로 내려가는 양 ([L37](../manager/skills.py#L37))
+- [ ] `GRIP_APPROACH_UNPACK_X` — 흡착 ON 전에 x 로 밀어 넣는 양 ([L38](../manager/skills.py#L38))
+- [ ] `APPROACH_X_OFFSET` — 자리 x 에서 뒤로 빠져 있는 거리 ([L41](../manager/skills.py#L41))
+- [ ] `PUT_BUFFER_Z_OFFSET` — 버퍼 바닥 위 띄우는 양 ([L44](../manager/skills.py#L44))
+
+### C. IK·이동 구현 (현재 NotImplementedError)
+RealArm 이 들어오면 `Stacker.ik()` 를 호출해서 CF 목표 → 관절 각으로 풀고 `robot.arm.command()` 로 보내야 함.
+
+- [ ] `alignment()` 안의 IK 호출 ([manager/skills.py:93](../manager/skills.py#L93))
+- [ ] `grip()` 안의 상대 이동 + `suction_on` ([manager/skills.py:96](../manager/skills.py#L96))
+- [ ] `approach_to_box()` 안의 yz→x 순차 이동 ([manager/skills.py:129](../manager/skills.py#L129))
+- [ ] `put_to_buffer()` 안의 z 이동 ([manager/skills.py:141](../manager/skills.py#L141))
+
+### D. 좌표계 상수 ([modules/transform/transform.py](../modules/transform/transform.py))
+`rail(x)` 가 CF x → Arduino mm 를 올바로 뽑으려면 먼저 이 보정값들이 필요.
+
+- [ ] `RAIL_ZERO_CF_X`, `RAIL_DIR` — 레일 0 mm 의 CF 위치
+- [ ] `WRIST_CAM_IN_EEF`, `ARUCO_BOX_SIZE_M` — alignment 에 필수
+- [ ] 자세한 체크리스트: [`pipeline.drawio`](pipeline.drawio) 의 "편집 지점" 섹션
+
+### E. BoxTable 확장 ([manager/boxes.py](../manager/boxes.py))
+- [ ] `BoxTable.remove(id)` — UnPacking 10단계에서 사용 (버퍼로 뺀 상자 제거)
+- [ ] 각 `BoxEntry` 에 `goal_cf`, `current` 를 CF 좌표로 유지 (이미 `main.py:load_manifest` 가 `goal_cf` 기록)
+
+## 장치 추상화
+
+| 장치 | 역할 |
+|---|---|
+| Arm | 팔 (Piper 6자유도) 관절 제어 |
+| Rail | x 방향 레일 1축 이동 |
+| Suction | 흡착 밸브 ON/OFF |
+| Camera | 손목·전체뷰 ArUco 기반 측정 |
+
+네 장치를 `Robot` 추상이 묶어 `follow(waypoints)`, `suction_on/off()`, `measure_box()`, `state()`, `stop()` 로 노출.
+sim(MuJoCo) / real(하드웨어) / dual(둘 동시) 세 백엔드가 같은 API 뒤에 있음.
+
+## 좌표계
+
+모든 측정·명령은 **Container Frame (CF)** — 바깥 프레임 왼쪽-아래 모서리 원점 — 로 통일.
+변환은 [`modules/transform/transform.py`](../modules/transform/transform.py) 가 담당 (CF ↔ MW/RC/RailMM/Cam/EEF).
 
 ## 참고
 
-**타이밍 A (dual)**: 같은 명령을 양쪽에 동시 전송. 시뮬은 즉시 반영, 실물은 모터 속도로 따라옴. 실물이 예외를 던지면 시뮬도 멈춤. `rail.command(m)` 중 MOVE 가 Arduino 쪽에서 `ERROR busy` 로 거부되면 Python 이 조용히 무시하고 다음 호출에 최신 목표로 추종.
-
-**좌표계 통일 (후속)**: 지금은 Sequencer 가 MuJoCo 좌표, `RealRail(zero_offset_m=-0.49)` 로 Arduino 0~1000 mm 와 연결. 추후 "컨테이너 좌표계" 로 모든 상수(`ORIGIN`, `PICK_XY`, `KEEPOUT_X`) 정비 예정.
-
-**기준 결과**: `packing/moves_big.json` (80개) — sim 모드 **성공 57 / 실패 23** (투입 구역 20 + 실제 실패 3).
+- 구현 상태·파일 매핑·사용자 보정 체크리스트는 [`pipeline.drawio`](pipeline.drawio)
+- 장치별 상세: [`details_by_modules/`](details_by_modules/)
+- 프레임 치수·좌표계 그림: [`settings/`](settings/)

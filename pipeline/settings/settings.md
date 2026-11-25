@@ -43,4 +43,4 @@
 - 설명 (월드·로봇 좌표, 축 방향): [pipeline/details_by_modules/mp.md:97-101](../details_by_modules/mp.md#L97-L101)
 - 로봇 좌표계 원점 상수: [modules/arm/stacking.py:31](../../modules/arm/stacking.py#L31) (`ORIGIN`)
 
-![alt text](coordinates_system_annotated.png)
+![alt text](floor_plan.png)

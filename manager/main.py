@@ -26,9 +26,11 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(ROOT / "modules" / "arm"))
+sys.path.insert(0, str(ROOT / "modules" / "transform"))
 
 from sequence import BOXES, Sequencer                 # noqa: E402
 from stacking import ORIGIN, set_view                 # noqa: E402
+import transform as cf                                 # noqa: E402  Container Frame 변환
 
 from robot import Robot                               # noqa: E402
 from skills import pick_and_place                     # noqa: E402
@@ -38,7 +40,13 @@ MOVES = ROOT / "modules" / "packing" / "examples" / "list" / "moves_big.json"
 
 
 def load_manifest(path: Path) -> list[dict]:
-    """handoff 의 계획 파일 (moves.json) 의 'place' 동작을 뽑아 BoxTable 입력 형식으로."""
+    """handoff 의 계획 파일 (moves.json) 의 'place' 동작을 뽑아 BoxTable 입력 형식으로.
+
+    Packing 모델이 쓰는 좌표계:  Robot coords (RC) — stacking.ORIGIN 기준
+      → CF 로 통일하려면 frame.rc_to_cf() 통과
+      → Sequencer 는 아직 MW 좌표를 받으므로 MW (= RC + ORIGIN) 로 변환해서 넘긴다
+    컨테이너 좌표계로 완전 통일 후에는 Sequencer 도 CF 를 받도록 바꾼다.
+    """
     out = []
     for mv in json.loads(path.read_text())["moves"]:
         if mv["kind"] != "place":
@@ -48,7 +56,11 @@ def load_manifest(path: Path) -> list[dict]:
         k = next((k for k, d in BOXES.items() if np.allclose(d, dims, atol=1e-6)), None)
         if k is None:
             raise SystemExit(f"상자 치수 {dims} 가 BOXES 에 없다")
-        out.append(dict(box_id=mv["box_id"], type=k, goal=np.array(mv["to"]["center_m"]) + ORIGIN, size_xyz=sz))
+        rc = np.array(mv["to"]["center_m"])              # Packing 원본 (RC)
+        goal_mw = rc + ORIGIN                            # 현재 Sequencer 입력 (MW)
+        goal_cf = cf.mw_to_cf(goal_mw)                   # 참고용 CF 값 (BoxTable 기록용)
+        out.append(dict(box_id=mv["box_id"], type=k,
+                        goal=goal_mw, goal_cf=goal_cf, size_xyz=sz))
     return out
 
 
