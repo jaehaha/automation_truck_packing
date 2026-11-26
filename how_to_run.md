@@ -1,5 +1,13 @@
 # 실행 방법
 
+## 0. 가장 쉬운 방법 — GUI 런처
+
+```bash
+conda activate capstone2
+python gui.py
+```
+
+창 하나에서 모드·포트 설정 + 파이프라인 실행 / 데모 녹화 / 장치 테스트 / 환경 점검을 다 할 수 있습니다. Mac 은 뷰어 작업에 `mjpython` 자동 사용. 아래 §1 ~ §7 은 CLI 로 직접 쓰고 싶을 때 참고.
 
 ## 1. 환경 설치 (Mac·Linux 공통)
 
