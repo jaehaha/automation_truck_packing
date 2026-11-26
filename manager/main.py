@@ -33,10 +33,10 @@ from stacking import ORIGIN, set_view                 # noqa: E402
 import transform as cf                                 # noqa: E402  Container Frame 변환
 
 from robot import Robot                               # noqa: E402
-from skills import pick_and_place                     # noqa: E402
+from actions import pick_and_place                    # noqa: E402
 from boxes import BoxTable                            # noqa: E402
 
-MOVES = ROOT / "modules" / "packing" / "examples" / "list" / "moves_big.json"
+MOVES = ROOT / "modules" / "packing_algorithm" / "examples" / "list" / "moves_big.json"
 
 
 def load_manifest(path: Path) -> list[dict]:

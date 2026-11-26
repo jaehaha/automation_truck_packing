@@ -3,18 +3,27 @@
 같은 메서드 집합을 실물용과 시뮬레이션용으로 둔다. ../../pipeline/details_by_modules/unified.md §3 참고.
 
   read()        -> 현재 레일 위치 m (float, 로봇 좌표계)
-  command(m)    -> 목표 위치 보내기
+  command(m)    -> 목표 위치 보내기                     (저수준, RC m)
   home()        -> 원점(0.0) 으로 복귀
+  mv(x_cf)      -> 상자 CF x (m) 에 맞춰 레일 이동       (고수준, CF m)
+                   팔 베이스가 x_cf - APPROACH_X_OFFSET 에 설 수 있는 위치로.
+                   x_cf == 0 은 홈 복귀 (actions 에서 사이클 끝의 rail(0) 용).
 
 범위는 MuJoCo 모델 (modules/arm/model/manibox_modified.xml:165) 의 조인트 range 와 같다: −0.49 ~ +0.51 m.
 """
 from __future__ import annotations
 
+import sys
 from abc import ABC, abstractmethod
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "transform"))
+import transform as _cf                                     # noqa: E402
 
 
 class Rail(ABC):
     RANGE = (-0.49, 0.51)   # m (로봇 좌표계)
+    APPROACH_X_OFFSET = 0.015   # m — 팔 베이스가 상자 CF x 보다 이 만큼 뒤에 서도록
 
     @abstractmethod
     def read(self) -> float: ...
@@ -22,6 +31,22 @@ class Rail(ABC):
     def command(self, m: float) -> None: ...
     @abstractmethod
     def home(self) -> None: ...
+    @abstractmethod
+    def _cf_x_to_rail_m(self, cf_x: float) -> float:
+        """CF x (m) → command() 가 받는 RC m 로 변환. 백엔드마다 다른 캘리브레이션."""
+        ...
+
+    def mv(self, x_cf: float) -> None:
+        """상자 CF x 좌표에 맞춰 레일 이동 — 팔 베이스가 x_cf - APPROACH_X_OFFSET 에 서도록.
+
+        x_cf == 0 은 홈 복귀 (사이클 끝의 rail(0)). 그 외에는 _cf_x_to_rail_m() 으로 변환 후 command().
+        """
+        x_cf = float(x_cf)
+        if x_cf == 0.0:
+            self.home()
+            return
+        arm_base_cf_x = x_cf - self.APPROACH_X_OFFSET
+        self.command(self._cf_x_to_rail_m(arm_base_cf_x))
 
     def _check(self, m: float) -> float:
         m = float(m)
@@ -48,9 +73,14 @@ class SimRail(Rail):
     def home(self):
         self.command(0.0)
 
+    def _cf_x_to_rail_m(self, cf_x: float) -> float:
+        """MW 상의 팔 베이스 x = _ORIGIN_MW[0] + rail_joint.
+        CF 는 CF_ORIGIN_IN_MW 로 평행이동만.  →  rail_joint = cf_x - (_ORIGIN_MW[0] - CF_ORIGIN_IN_MW[0])."""
+        return float(cf_x) - (_cf._ORIGIN_MW[0] - _cf.CF_ORIGIN_IN_MW[0])
+
 
 class RealRail(Rail):
-    """실물: modules/rail_vacuum.ino 펌웨어가 올라간 공유 아두이노를 쓴다.
+    """실물: modules/rail_suction.ino 펌웨어가 올라간 공유 아두이노를 쓴다.
     아두이노 좌표는 0 ~ 1000 mm, Rail API 좌표는 Rail.RANGE (−0.49 ~ +0.51 m, RC 기준).
 
     두 좌표계의 매핑은 modules/transform/transform.py 의 RAIL_ZERO_CF_X 를 거쳐 통일한다. 다만 지금 Sequencer
@@ -113,6 +143,11 @@ class RealRail(Rail):
                 return
             raise
 
+    def _cf_x_to_rail_m(self, cf_x: float) -> float:
+        """CF x → Arduino mm (transform.py) → RC m (zero_offset_m 통해 평행이동)."""
+        arduino_mm = _cf.cf_x_to_rail_mm(float(cf_x))
+        return arduino_mm / 1000.0 + self.zero_offset_m
+
 
 class DualRail(Rail):
     """실물과 시뮬 양쪽에 같은 명령 (타이밍 A). 상태(read) 는 실물 기준."""
@@ -131,3 +166,12 @@ class DualRail(Rail):
     def home(self):
         self.real.home()
         self.sim.home()
+
+    def _cf_x_to_rail_m(self, cf_x: float) -> float:
+        # Dual 에서는 실물 기준 (sim 쪽은 자기 변환으로 따라감)
+        return self.real._cf_x_to_rail_m(cf_x)
+
+    def mv(self, x_cf: float) -> None:
+        # 양쪽에 각자 변환을 쓰게 하려고 override — 기본 구현 (base.mv) 은 한쪽 변환만 씀.
+        self.real.mv(x_cf)
+        self.sim.mv(x_cf)

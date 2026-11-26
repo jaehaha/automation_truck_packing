@@ -1,18 +1,18 @@
-# manager: 통합 관리
+# manager
 
-**arm · rail · vacuum · camera 네 장치를 하나의 Robot 추상 뒤에 묶어서 관리**하는 계층.
-
-파이프라인 전체 흐름(Packing Model → Motion Planning → Robot 실행 → BoxTable 갱신)을 돌리는 엔트리포인트와, 장치 명령·skill·상자 상태를 중앙에서 다룬다. 상세 흐름은 [`../pipeline/pipeline.drawio`](../pipeline/pipeline.drawio) 참고.
+`modules/` 의 장치·알고리즘 모듈을 묶어 **파이프라인 전체를 돌리는 엔트리포인트와 제어 계층**
+자세한 파이프라인 흐름: [`../pipeline/pipeline.md`](../pipeline/pipeline.md)
 
 ## 파일
 
 | 파일 | 역할 |
 |---|---|
 | `main.py` | 엔트리포인트. 상자 목록 로드 → 순차 계획·실행·표 갱신 루프 |
-| `robot.py` | `Robot` 추상. 네 장치를 묶어 `follow()`, `suction_on/off()`, `measure_box()`, `state()`, `stop()` 노출. `.sim / .real / .dual` 팩토리 |
-| `skills.py` | `pick_and_place()` 등 Robot 메서드를 조합한 동작 |
-| `boxes.py` | `BoxTable`. id → {size, current, goal, state} |
-| `arduino.py` | 레일·흡착이 공유하는 시리얼 연결 (`send`, `drain`, `init_shared`) |
+| `robot.py` | `Robot` 추상 — 팔·레일·흡착·카메라 네 장치를 묶어 `follow / suction_on/off / measure_box / state / stop` 노출. `.sim / .real / .dual` 팩토리 |
+| `actions.py` | 사이클 호출 — `packing(box)`, `unpacking(box)`. arm 동작은 [`modules/arm/skills.py`](../modules/arm/skills.py), 흡착은 [`Suction.grip/un_grip`](../modules/suction/suction.py), 레일은 [`Rail.mv`](../modules/rail/rail.py) |
+| `boxes.py` | `BoxTable` — id → `{size, current, goal, state}` 상자 표 |
+| `arduino.py` | 레일·흡착이 공유하는 시리얼 연결 (`send / drain / init_shared`) |
+| `demos/*.npz` | 사용자 녹화 궤적·자세 (`mv_pos`, `approach_to_buffer`) |
 
 ## 실행
 
@@ -20,36 +20,30 @@
 conda activate capstone2
 cd manager
 
-mjpython main.py --mode sim                            # 시뮬 + 뷰어
-python  main.py --mode sim --no-view                   # 시뮬 계획만 (빠름)
-mjpython main.py --mode dual --port /dev/tty.usbmodemXXXX  # 실물 + 뷰어 (디지털 트윈)
-python  main.py --mode real --port /dev/tty.usbmodemXXXX   # 실물만
+mjpython main.py --mode sim                                   # 시뮬 + 뷰어
+python  main.py --mode sim --no-view                          # 시뮬 계획만 (빠름)
+mjpython main.py --mode dual --port /dev/tty.usbmodemXXXX     # 실물 + 뷰어 (디지털 트윈)
+python  main.py --mode real --port /dev/tty.usbmodemXXXX      # 실물만
 ```
 
 | 모드 | 명령 전송 | 상태 read | 뷰어 |
 |---|---|---|---|
 | sim | Sim* → MuJoCo | MuJoCo | mjpython |
-| real | Real* → CAN + 아두이노 | 하드웨어 | 없음 |
-| dual | Dual* = 실물 + 시뮬 동시 | **실물** | mjpython (시뮬이 거울) |
-
-**타이밍 A (dual)**: 같은 명령을 양쪽에 동시 전송. 시뮬은 즉시 반영, 실물은 모터 속도로 따라옴.
+| real | Real* → CAN + Arduino | 하드웨어 | 없음 |
+| dual | Dual* = 실물 + 시뮬 동시 | **실물** | mjpython (시뮬=거울) |
 
 ## 쓰이는 모듈
 
 ```
 modules/
-  packing/   어디에 놓을지 → moves.json
-  arm/       팔 wrapper + 모션플래닝 (sequence/stacking/rules + model/assets)
-  rail/  vacuum/  camera/           장치 wrapper (sim + real)
-  rail_vacuum.ino                   Arduino 1보드 펌웨어
+  arm/                팔 wrapper + 모션플래닝 + actions (세부 동작)
+  rail/  suction/  camera/   장치 wrapper (sim + real 백엔드)
+  transform/          통합 좌표계 변환 (CF ↔ MW/RC/RailMM/Cam/EEF)
+  packing_algorithm/  어디에 놓을지 → moves.json
+  rail_suction.ino    Arduino 1보드 펌웨어
 ```
 
-## 구현 상태
+## 참고
 
-구현 상태별 블록 색깔은 [`../pipeline/pipeline.drawio`](../pipeline/pipeline.drawio) 참고.
-
-- ✅ 완료: Rail, Suction, Arduino 공유 시리얼, Robot/skills/BoxTable, main.py
-- ⚠️ 부분: Arm (sim ✅ / real ❌), Camera (sim ✅ / real ❌), `measure_box()` 더미
-- ❌ 미구현: `RealArm` (Piper CAN), `RealCamera` (OpenCV + ArUco)
-
-기준 결과 (`packing/moves_big.json`, 80개, sim 모드): **성공 57 / 실패 23** (투입 구역 20 + 실제 실패 3).
+- 구현 상태·편집 지점: [`../pipeline/pipeline.drawio`](../pipeline/pipeline.drawio)
+- 완성해야 할 것: [`../todo.md`](../todo.md)

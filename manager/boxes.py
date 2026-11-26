@@ -55,5 +55,9 @@ class BoxTable:
     def fail(self, box_id: str):
         self.boxes[box_id].state = "failed"
 
+    def remove(self, box_id: str):
+        """UnPacking 완료: 버퍼로 꺼낸 상자를 표에서 제거."""
+        self.boxes.pop(box_id, None)
+
     def __getitem__(self, box_id: str) -> BoxEntry:
         return self.boxes[box_id]

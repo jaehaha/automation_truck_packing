@@ -148,12 +148,14 @@
     <geom class="frame_col" type="box" pos="1.24500 0.33400 0.76800" size="0.00100 0.02300 0.02600"/>
     <geom class="frame_col" type="box" pos="1.29300 0.33400 0.76800" size="0.00100 0.02300 0.02600"/>
 
-    <!-- 바닥판(하드보드지 자리): 하단 프레임 위에 얹은 두께 3mm 판 3장. 가로대(x=0.54, 1.06) 중심에서 나뉜다.
+    <!-- 바닥판(하드보드지 자리): 하단 프레임 안쪽에 얹은 두께 3mm 판 3장. 가로대(x=0.54, 1.06) 중심에서 나뉜다.
          팔이 home 일 때 joint3(팔꿈치, x≈0.42)이 있는 -x 쪽 칸이 흰색, 나머지 두 칸은 회색. 팔과 충돌한다.
-         벽과 같은 group 1 이라 뷰어에서 숫자 1 키(또는 왼쪽 패널 Group enable > Geom 1)로 함께 켜고 끈다. -->
-    <geom name="board_1" type="box" pos="0.290 0.280 0.0415" size="0.250 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
-    <geom name="board_2" type="box" pos="0.800 0.280 0.0415" size="0.260 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
-    <geom name="board_3" type="box" pos="1.310 0.280 0.0415" size="0.250 0.240 0.0015" material="board_gray" contype="1" conaffinity="0" group="1"/>
+         벽과 같은 group 1 이라 뷰어에서 숫자 1 키(또는 왼쪽 패널 Group enable > Geom 1)로 함께 켜고 끈다.
+         판의 윗면이 stacking.FLOOR 바로 아래에 오고 (FLOOR 상자 바닥에 margin=CLEAR 가 걸리지 않도록),
+         contype=0 conaffinity=0 로 충돌 비활성 — 상자·공구와 물리 간섭하지 않는 시각 전용. -->
+    <geom name="board_1" type="box" pos="0.290 0.280 0.0385" size="0.250 0.240 0.0015" material="board_gray" contype="0" conaffinity="0" group="1"/>
+    <geom name="board_2" type="box" pos="0.800 0.280 0.0385" size="0.260 0.240 0.0015" material="board_gray" contype="0" conaffinity="0" group="1"/>
+    <geom name="board_3" type="box" pos="1.310 0.280 0.0385" size="0.250 0.240 0.0015" material="board_gray" contype="0" conaffinity="0" group="1"/>
     <!-- 벽(회색 하드보드지, 두께 3mm): 프레임 바깥면에 붙인다. 넓은 양쪽 면(y=0, y=0.56)과 공구가 바라보는 +x 끝면(x=1.6).
          group 1 이라 뷰어에서 숫자 1 키(또는 왼쪽 패널 Group enable > Geom 1)로 켜고 끈다. -->
     <geom name="wall_front" type="box" pos="0.800 -0.0015 0.390" size="0.800 0.0015 0.390" material="board_gray" contype="1" conaffinity="0" group="1"/>

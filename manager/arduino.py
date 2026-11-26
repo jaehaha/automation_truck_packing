@@ -1,5 +1,5 @@
 """하나의 아두이노에 레일 + 흡착 밸브가 같이 물려 있을 때 쓰는 공유 시리얼 연결.
-펌웨어: modules/rail_vacuum.ino
+펌웨어: modules/rail_suction.ino
 
 프로토콜 (ASCII, 개행 종료, 115200 baud, 모든 명령 대문자).
 주요 명령:

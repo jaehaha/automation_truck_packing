@@ -11,7 +11,7 @@
   CF  — 이 모듈이 정의
   MW  — MuJoCo world (modules/arm/model/manibox_modified.xml 안의 좌표)
   RC  — Robot Coords, stacking.py 의 ORIGIN(팔 베이스가 레일 0 일 때의 MW 좌표) 기준
-  RM  — Rail mm, 아두이노 modules/rail_vacuum.ino 의 0 ~ 1000 mm
+  RM  — Rail mm, 아두이노 modules/rail_suction.ino 의 0 ~ 1000 mm
   CC  — Camera coords, OpenCV 가 반환하는 카메라 광학 중심 기준
 
 TODO (사용자 보정 필요):

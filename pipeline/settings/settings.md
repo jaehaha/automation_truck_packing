@@ -3,7 +3,7 @@
 - 프레임 기둥·가로대 (바닥 레일, 세로 기둥, 상단 레일): [modules/arm/model/manibox_modified.xml:70-149](../../modules/arm/model/manibox_modified.xml#L70-L149)
 - 바닥판 (board_1~3): [modules/arm/model/manibox_modified.xml:154-156](../../modules/arm/model/manibox_modified.xml#L154-L156)
 - 벽 패널 (wall_front, wall_back, wall_end): [modules/arm/model/manibox_modified.xml:159-161](../../modules/arm/model/manibox_modified.xml#L159-L161)
-- 바닥판 윗면 z 상수: [modules/arm/stacking.py:32](../../modules/arm/stacking.py#L32) (`FLOOR = 0.043`)
+- 바닥판 윗면 z 상수: [modules/arm/stacking.py:32](../../modules/arm/stacking.py#L32) (`FLOOR = 0.04`) — 상자 바닥이 닿는 월드 z. 모델의 `board_1/2/3` 윗면과 일치.
 - 공구 끝 최고 높이: [modules/arm/stacking.py:44](../../modules/arm/stacking.py#L44) (`MV_CUP_POS = 0.47`)
 
 ### 박스 사이즈

@@ -12,7 +12,7 @@
 | 3. 레일 이동 | mv_rail (with mv_pos) | 놓을 자리의 x |
 | 4. 놓기 | 내리기 → 밀어 넣기 → 흡착 끔 → 온 길로 복귀 | 없음 (2에서 이미 맞춤) |
 
-- **어디에 놓을지**는 Packing Model(`modules/packing`)이 정한다.
+- **어디에 놓을지**는 Packing Model(`modules/packing_algorithm`)이 정한다.
 - **어떻게 옮길지**는 위 네 단계다. 역기구학과 충돌 검사는 `../../modules/arm/stacking.py` (`sim_final` 의 `Stacker` 를 옮긴 것)를 쓴다.
 - 지금의 `Stacker.plan` 은 상자마다 경로를 탐색한다. 탐색은 실패할 수 있고(시험 23개 중 5개), 결과가 관절값 목록이라 "이 상황에서는 이렇게"를 고칠 곳이 없다. 그래서 탐색 대신 정해진 순서로 바꾼다.
 

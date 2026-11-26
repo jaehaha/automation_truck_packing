@@ -27,7 +27,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(ROOT / "modules" / "arm"))
 sys.path.insert(0, str(ROOT / "modules" / "rail"))
-sys.path.insert(0, str(ROOT / "modules" / "vacuum"))
+sys.path.insert(0, str(ROOT / "modules" / "suction"))
 sys.path.insert(0, str(ROOT / "modules" / "camera"))
 
 from arm import Arm, SimArm, RealArm, DualArm                     # noqa: E402

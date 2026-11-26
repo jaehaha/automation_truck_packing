@@ -42,7 +42,7 @@ class SimCamera(Camera):
 
     def markers(self):
         # Sim 에서는 상자의 ground-truth 위치를 CF 로 돌려주는 식도 가능.
-        # 지금은 빈 리스트 (더미). skills.pick_and_place 가 sim 에서는 이 메서드를 안 쓴다.
+        # 지금은 빈 리스트 (더미). actions.pick_and_place 가 sim 에서는 이 메서드를 안 쓴다.
         return []
 
 

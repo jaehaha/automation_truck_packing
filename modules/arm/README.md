@@ -18,4 +18,4 @@
 
 - [`manager/robot.py`](../../manager/robot.py) — `SimArm/RealArm/DualArm` 사용
 - [`manager/main.py`](../../manager/main.py) — `Sequencer` 호출
-- [`modules/rail/rail.py`](../rail/rail.py), [`modules/vacuum/suction.py`](../vacuum/suction.py), [`modules/camera/camera.py`](../camera/camera.py) — 여기 `Stacker` 가 로드한 MuJoCo `model/data` 를 공유
+- [`modules/rail/rail.py`](../rail/rail.py), [`modules/suction/suction.py`](../suction/suction.py), [`modules/camera/camera.py`](../camera/camera.py) — 여기 `Stacker` 가 로드한 MuJoCo `model/data` 를 공유

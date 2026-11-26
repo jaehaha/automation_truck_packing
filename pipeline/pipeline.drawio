@@ -43,7 +43,7 @@
                 <mxCell id="s1a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;1. Packing Model — 적재 계획&lt;/b&gt;&#xa;학습된 정책 → 각 상자의 goal (순서대로)" vertex="1">
                     <mxGeometry height="60" width="430" x="40" y="294" as="geometry"/>
                 </mxCell>
-                <mxCell id="s1b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;modules/packing/plan_moves.py&lt;/b&gt;&#xa;(현재: moves_big.json 사전 생성본 사용. 런타임 호출로 바꾸려면 main.py 에 추가)" vertex="1">
+                <mxCell id="s1b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;modules/packing_algorithm/plan_moves.py&lt;/b&gt;&#xa;(현재: moves_big.json 사전 생성본 사용. 런타임 호출로 바꾸려면 main.py 에 추가)" vertex="1">
                     <mxGeometry height="60" width="430" x="480" y="294" as="geometry"/>
                 </mxCell>
                 <mxCell id="s1c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#999999;" value="—" vertex="1">
@@ -88,7 +88,7 @@
                 <mxCell id="s3b2c" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" value="— (순수 계산)" vertex="1">
                     <mxGeometry height="78" width="430" x="920" y="670" as="geometry"/>
                 </mxCell>
-                <mxCell id="sxa" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=13;fontStyle=1;" value="&lt;b&gt;실행 — skills.pick_and_place&lt;/b&gt;&#xa;manager/skills.py" vertex="1">
+                <mxCell id="sxa" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=13;fontStyle=1;" value="&lt;b&gt;실행 — actions.pick_and_place&lt;/b&gt;&#xa;manager/actions.py" vertex="1">
                     <mxGeometry height="52" width="430" x="40" y="768" as="geometry"/>
                 </mxCell>
                 <mxCell id="s4a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;4. 접근&lt;/b&gt;&#xa;현재 자세 → 투입 위치 위 (빈손)" vertex="1">
@@ -103,7 +103,7 @@
                 <mxCell id="s5a" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=12;" value="&lt;b&gt;5. 흡착 ON — 상자 집기&lt;/b&gt;&#xa;붙을 때까지 대기" vertex="1">
                     <mxGeometry height="56" width="430" x="40" y="920" as="geometry"/>
                 </mxCell>
-                <mxCell id="s5b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;robot.suction_on()&lt;/b&gt;  →  suction.on()&#xa;modules/vacuum/suction.py (RealSuction.on → &#39;ON\n&#39;)" vertex="1">
+                <mxCell id="s5b" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;robot.suction_on()&lt;/b&gt;  →  suction.on()&#xa;modules/suction/suction.py (RealSuction.on → &#39;ON\n&#39;)" vertex="1">
                     <mxGeometry height="56" width="430" x="480" y="920" as="geometry"/>
                 </mxCell>
                 <mxCell id="s5c" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;솔레노이드 밸브&lt;/b&gt;&#xa;Arduino D7 LOW-Trigger 릴레이" vertex="1">
@@ -201,13 +201,13 @@
                 <mxCell id="hw_rail" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Rail&lt;/b&gt;  modules/rail/rail.py&#xa;read(), command(m), home()&#xa;Sim: MuJoCo ctrl[0]  ✅&#xa;Real: Arduino M/P/H  ✅&#xa;Dual: 둘 다  ✅" vertex="1">
                     <mxGeometry height="110" width="260" x="1400" y="308" as="geometry"/>
                 </mxCell>
-                <mxCell id="hw_suc" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Suction&lt;/b&gt;  modules/vacuum/suction.py&#xa;on(), off(), holding()&#xa;Sim: 상태만 추적  ✅&#xa;Real: Arduino ON/OFF  ✅&#xa;Dual: 둘 다  ✅" vertex="1">
+                <mxCell id="hw_suc" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Suction&lt;/b&gt;  modules/suction/suction.py&#xa;on(), off(), holding()&#xa;Sim: 상태만 추적  ✅&#xa;Real: Arduino ON/OFF  ✅&#xa;Dual: 둘 다  ✅" vertex="1">
                     <mxGeometry height="110" width="260" x="1400" y="428" as="geometry"/>
                 </mxCell>
                 <mxCell id="hw_cam" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=11;" value="&lt;b&gt;Camera&lt;/b&gt;  modules/camera/camera.py&#xa;frame(), markers()&#xa;Sim: MuJoCo 렌더  ✅&#xa;Real: OpenCV + ArUco  ❌&#xa;Dual: 둘 다 (카메라 때문에 블록)" vertex="1">
                     <mxGeometry height="110" width="260" x="1400" y="548" as="geometry"/>
                 </mxCell>
-                <mxCell id="hw_ard" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Arduino (공유 시리얼)&lt;/b&gt;&#xa;manager/arduino.py — Arduino.send()&#xa;펌웨어: modules/rail_vacuum.ino&#xa;프로토콜: M/P/H, ON/OFF, POS, STOP&#xa;115200 baud, ASCII" vertex="1">
+                <mxCell id="hw_ard" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Arduino (공유 시리얼)&lt;/b&gt;&#xa;manager/arduino.py — Arduino.send()&#xa;펌웨어: modules/rail_suction.ino&#xa;프로토콜: M/P/H, ON/OFF, POS, STOP&#xa;115200 baud, ASCII" vertex="1">
                     <mxGeometry height="110" width="260" x="1400" y="668" as="geometry"/>
                 </mxCell>
                 <mxCell id="hw_rob" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#1f4d12;fontSize=11;" value="&lt;b&gt;Robot&lt;/b&gt;  manager/robot.py&#xa;네 장치 묶음 (DualArm, DualRail, DualSuction, DualCamera)&#xa;.sim / .real / .dual 팩토리&#xa;follow(wps), suction_on/off(), state(), stop()" vertex="1">
@@ -310,17 +310,17 @@
                     <mxGeometry height="60" width="450" x="920" y="1910" as="geometry"/>
                 </mxCell>
 
-                <mxCell id="ep_sk1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;Skills 함수 + 보정 상수&lt;/b&gt;&#xa;Packing/UnPacking LOOP 각 단계" vertex="1">
+                <mxCell id="ep_sk1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#5a4210;fontSize=12;" value="&lt;b&gt;Skills + Actions&lt;/b&gt;&#xa;Packing/UnPacking LOOP 각 단계" vertex="1">
                     <mxGeometry height="80" width="260" x="40" y="1990" as="geometry"/>
                 </mxCell>
-                <mxCell id="ep_sk2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontColor=#333333;fontSize=11;" value="manager/skills.py&#xa;    mv_pos, approach_to_buffer       (demo 로딩)&#xa;    alignment(mode), grip(mode), approach_to_box(mode), put_to_buffer   (IK)&#xa;    rail(x_cf), un_grip             (단순 호출)&#xa;    pack_one, unpack_one            (전체 사이클)&#xa;manager/demos/*.npz    사용자 녹화 궤적·자세" vertex="1">
+                <mxCell id="ep_sk2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontColor=#333333;fontSize=11;" value="manager/actions.py  packing(), unpacking() — 호출만&#xa;modules/arm/skills.py       arm 원자 동작 (구체 구현)&#xa;    mv_pos, approach_to_buffer       (demo 로딩)&#xa;    alignment, approach_to_box, put_to_buffer   (IK)&#xa;modules/suction/suction.py  Suction.grip(mode), un_grip()&#xa;modules/rail/rail.py        Rail.mv(x_cf)   (CF x → 레일 명령)&#xa;manager/demos/*.npz    사용자 녹화 궤적·자세" vertex="1">
                     <mxGeometry height="80" width="600" x="310" y="1990" as="geometry"/>
                 </mxCell>
-                <mxCell id="ep_sk3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" value="(1) demos/*.npz 녹화 — mv_pos, approach_to_buffer&#xa;(2) offset 상수 — ALIGN_/GRIP_/APPROACH_X_/PUT_BUFFER_Z_OFFSET 실측&#xa;(3) RealArm + Stacker.ik() 연결로 alignment/grip/approach_to_box/put_to_buffer NotImplementedError 해소" vertex="1">
+                <mxCell id="ep_sk3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cf9b2d;fontColor=#4a3908;fontSize=11;align=left;verticalAlign=top;" value="(1) demos/*.npz 녹화 — mv_pos, approach_to_buffer&#xa;(2) offset 상수 — ALIGN_/GRIP_/APPROACH_X_/PUT_BUFFER_Z_OFFSET 실측&#xa;(3) RealArm + Stacker.ik() 연결로 alignment/approach_to_box/put_to_buffer NotImplementedError 해소&#xa;(4) Rail._cf_x_to_rail_m 실측 캘리브레이션 (sim/real 각자)" vertex="1">
                     <mxGeometry height="80" width="450" x="920" y="1990" as="geometry"/>
                 </mxCell>
 
-                <mxCell id="ep_cal" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#cccccc;align=left;verticalAlign=top;fontSize=11;fontColor=#333333;" value="&lt;b&gt;사용자 작업 체크리스트&lt;/b&gt;&#xa;□ 프레임 각 코너·중앙에 ArUco fiducial 설치, id·크기·CF 위치 기록 → transform.ARUCO_FIDUCIAL_IDS&#xa;□ 손목·전체뷰 카메라 내부 캘리브레이션 (K, dist) — OpenCV 체커보드 스크립트&#xa;□ 손목 카메라 → TCP 포즈 측정 (hand-eye calibration 또는 CAD 수치) → transform.WRIST_CAM_IN_EEF&#xa;□ 레일 0 mm 를 CF 어느 x 에 둘지 결정 → transform.RAIL_ZERO_CF_X&#xa;□ 상자 윗면에 ArUco 마커 부착 (크기 통일) → transform.ARUCO_BOX_SIZE_M&#xa;□ (선택) CF 원점을 MuJoCo 모델의 바깥 프레임 왼쪽-아래로 맞추도록 모델 shift → transform.CF_ORIGIN_IN_MW&#xa;□ manager/demos/mv_pos.npz, approach_to_buffer.npz 녹화&#xa;□ manager/skills.py 의 offset 상수 6개 실측값 입력&#xa;□ BoxTable.remove(id) 추가 (unpacking 10단계)" vertex="1">
+                <mxCell id="ep_cal" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#cccccc;align=left;verticalAlign=top;fontSize=11;fontColor=#333333;" value="&lt;b&gt;사용자 작업 체크리스트&lt;/b&gt;&#xa;□ 프레임 각 코너·중앙에 ArUco fiducial 설치, id·크기·CF 위치 기록 → transform.ARUCO_FIDUCIAL_IDS&#xa;□ 손목·전체뷰 카메라 내부 캘리브레이션 (K, dist) — OpenCV 체커보드 스크립트&#xa;□ 손목 카메라 → TCP 포즈 측정 (hand-eye calibration 또는 CAD 수치) → transform.WRIST_CAM_IN_EEF&#xa;□ 레일 0 mm 를 CF 어느 x 에 둘지 결정 → transform.RAIL_ZERO_CF_X&#xa;□ 상자 윗면에 ArUco 마커 부착 (크기 통일) → transform.ARUCO_BOX_SIZE_M&#xa;□ (선택) CF 원점을 MuJoCo 모델의 바깥 프레임 왼쪽-아래로 맞추도록 모델 shift → transform.CF_ORIGIN_IN_MW&#xa;□ manager/demos/mv_pos.npz, approach_to_buffer.npz 녹화&#xa;□ modules/arm/skills.py 의 offset 상수 6개 실측값 입력&#xa;□ modules/rail/rail.py 의 _cf_x_to_rail_m 실측 캘리브레이션 (SimRail/RealRail 각자)" vertex="1">
                     <mxGeometry height="220" width="1320" x="40" y="2090" as="geometry"/>
                 </mxCell>
 

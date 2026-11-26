@@ -21,7 +21,7 @@
 | Packing Model | handoff 의 적재 정책. 상자 목록 전체를 한 번에 넣고 순서와 자리를 받는다 (`plan_moves.py --manifest` → `feed_order`, `moves[].to`) |
 | 상자 표 | `BoxTable`: `id -> {size, current, goal, state}`. 프레임워크가 가진 **유일한 장면 정보**다 |
 | Motion Planning | `sim_final` 의 `Stacker.plan`. 집는 곳 = 표의 `current`, 놓는 곳 = `goal`, 장애물 = 표에서 이미 놓인(`placed`) 상자들 |
-| 실행 | `skills.pick_and_place(robot, plan)` |
+| 실행 | `actions.pick_and_place(robot, plan)` |
 | 완료 신호 → 갱신 | 실행이 예외 없이 끝나면 `table.done(id)`: `current = goal`, `state = placed` |
 
 슬라이드에 없지만 정해야 하는 것:
@@ -36,7 +36,7 @@
 ```
 작업      job.py        Packing Model 호출 -> 목록을 순서대로: 표 조회 -> 경로(Stacker) -> 실행 -> 표 갱신
           boxes.py      BoxTable (상자 표)
-동작      skills.py     pick_and_place, measure_box, go_ready
+동작      actions.py     pick_and_place, packing, unpacking
 로봇      robot.py      Robot: follow(경유점), suction(on), state()   <- API 는 여기까지만 노출
 장치      arm.py / rail.py / suction.py / camera.py
 백엔드    real (Piper SDK, 시리얼, OpenCV)  |  sim (sim_final 의 MuJoCo 모델)
@@ -56,7 +56,7 @@ robot.measure_box()                # 손목 카메라 -> (dx, dy, yaw). 마커�
 robot.stop()                       # 그 자리에서 정지. 흡착 상태는 그대로 둔다
 
 # 동작 하나 = 위 호출의 정해진 조합
-skills.pick_and_place(robot, plan) # approach -> suction on -> carry -> suction off -> retreat
+actions.pick_and_place(robot, plan) # approach -> suction on -> carry -> suction off -> retreat
 ```
 
 작업 층 (슬라이드의 고리 그대로):
@@ -71,7 +71,7 @@ for box_id, goal in order:
     if not plan.ok:
         order = packing_model(table.remaining(), forbid=goal)   # 남은 상자만 다시 계획
         continue
-    skills.pick_and_place(robot, plan)
+    actions.pick_and_place(robot, plan)
     table.done(box_id)                         # 완료 신호: current = goal, state = placed
 ```
 
@@ -85,7 +85,7 @@ for box_id, goal in order:
 |---|---|---|---|
 | `Arm` | `read() -> q`, `command(q)` | Piper SDK `JointCtrl` (지금 `piper_keyboard.py` 방식) | MuJoCo `ctrl[1:7]` |
 | `Rail` | `read() -> m`, `command(m)`, `home()` | 아두이노 시리얼 (`linear.md`) | MuJoCo `ctrl[0]` |
-| `Suction` | `on()`, `off()`, `holding()` | 아두이노 시리얼 (`vacuum.md`) | 상자를 공구에 붙였다 떼기 |
+| `Suction` | `on()`, `off()`, `holding()` | 아두이노 시리얼 (`suction.md`) | 상자를 공구에 붙였다 떼기 |
 | `Camera` | `frame()`, `markers()` | OpenCV + ArUco (`camera.md`) | MuJoCo 렌더 (`wrist`, `overview` 카메라가 모델에 있다) |
 
 `Robot.real()` 과 `Robot.sim()` 은 어떤 장치 묶음을 쓰는지만 다르다.
@@ -128,11 +128,11 @@ manipulator/
     devices/arm.py rail.py suction.py camera.py     # 실물
     sim/backend.py                                  # sim_final 모델로 같은 인터페이스
     robot.py                                        # Robot, follow(), 제어 스레드
-    skills.py                                       # pick_and_place, measure_box
+    actions.py                              # pick_and_place, packing, unpacking
     boxes.py                                        # BoxTable: 상자 표 (크기, 현재 위치, 목표 위치, 상태)
     job.py                                          # Packing Model -> 순서대로 경로 계획 -> 실행 -> 표 갱신
     config.yaml                                     # 포트, 한계, 대기 시간, 카메라 보정값
-  firmware/rail_vacuum.ino
+  firmware/rail_suction.ino
 ```
 
 ## 8. 만드는 순서
@@ -143,6 +143,6 @@ manipulator/
 4. `Suction` 실물: 고정 위치에서 집고 놓기
 5. `Camera`: 보정 → `measure_box()` 값 검증
 6. `BoxTable` + `job`: 시뮬레이션에서 파이프라인 고리 전체 (Packing Model → 순차 계획 → 실행 → 표 갱신)
-7. `skills.pick_and_place` → `job` 을 실물에 연결
+7. `actions` 호출 → `job` 을 실물에 연결
 
 각 단계는 앞 단계가 실물에서 확인된 뒤에 넘어간다.

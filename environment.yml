@@ -5,7 +5,7 @@ dependencies:
   - python=3.12
   - pip
   - pip:
-      # 시뮬레이션 / 모션 플래닝 (mp, packing, test) — uv.lock 버전에 맞춤
+      # 시뮬레이션 / 모션 플래닝 (mp, packing_algorithm, test) — uv.lock 버전에 맞춤
       - mujoco==4.0.1
       - numpy==2.5.5
       - scipy==1.18.1
