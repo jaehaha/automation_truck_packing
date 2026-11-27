@@ -10,9 +10,9 @@
        └─ 개발자 모드 ──▶ [개발자 메뉴]
                               ├─ 알고리즘 개발
                               ├─ arm          (demo 녹화 / 함수 호출 테스트)
-                              ├─ suction      (ON/OFF)
+                              ├─ suction      (ON/OFF, rail 과 시리얼 연결 공유)
                               ├─ camera       (wrist + overview RGB)
-                              └─ rail         (함수 호출 테스트)
+                              └─ rail         (INIT / MOVE / H / SPEED 직접 명령)
 
 실행:
     python gui.py          # tkinter (표준 라이브러리).
@@ -38,6 +38,27 @@ DEFAULT_INPUT = SEQUENCE_DIR / "input.json"
 DEFAULT_MOVES = SEQUENCE_DIR / "moves.json"
 PACKING_DIR = ROOT / "modules" / "packing_algorithm"
 ICON_PATH = ROOT / "assets" / "icon.png"
+
+# Linux 에는 Arial / Menlo 가 없고, 한글은 CJK 글꼴이 있어야 보인다 (tk 는 xft 빌드 필요).
+UI_FONT = "Arial" if IS_MAC else "Noto Sans CJK KR"
+MONO_FONT = "Menlo" if IS_MAC else "Noto Sans Mono CJK KR"
+
+
+def _apply_fonts(root: tk.Tk) -> None:
+    """ttk 위젯 기본 글꼴을 한글 되는 글꼴로. tk 가 noxft 빌드면 한글이 깨진다."""
+    import tkinter.font as tkfont
+    if not IS_MAC and "Noto Sans CJK KR" not in tkfont.families(root):
+        print("[gui] Noto Sans CJK KR 없음 — 한글이 깨질 수 있음", flush=True)
+    for name in ("TkDefaultFont", "TkTextFont", "TkMenuFont", "TkHeadingFont",
+                 "TkCaptionFont", "TkSmallCaptionFont", "TkIconFont", "TkTooltipFont"):
+        try:
+            tkfont.nametofont(name, root).configure(family=UI_FONT)
+        except tk.TclError:
+            pass
+    try:
+        tkfont.nametofont("TkFixedFont", root).configure(family=MONO_FONT)
+    except tk.TclError:
+        pass
 
 
 def _apply_icon(root: tk.Tk) -> None:
@@ -205,6 +226,118 @@ def dock_launcher_and_viewer(root: tk.Tk, log_q: queue.Queue):
 
 
 # ============================================================
+#  공유 시리얼 연결 (레일 + 흡착이 한 아두이노)
+# ============================================================
+DEFAULT_PORT = "/dev/tty.usbmodem0001" if IS_MAC else "/dev/ttyACM0"
+
+
+class SerialLink:
+    """GUI 전체에서 하나만 두는 아두이노 연결. 화면을 옮겨도 유지된다.
+
+    포트를 열 때마다 아두이노가 리셋되어 레일 INIT / SPEED / ACCEL / 흡착 상태가 날아가므로,
+    버튼마다 서브프로세스로 포트를 여는 대신 여기서 한 번 열어 두고 계속 쓴다.
+    수신 줄은 지금 보이는 화면의 로그(log_q) 로 보낸다.
+    """
+
+    def __init__(self):
+        self.ser = None
+        self.port = DEFAULT_PORT
+        self.log_q: queue.Queue | None = None
+        self._stop = threading.Event()
+        self._connecting = False
+
+    @property
+    def connected(self) -> bool:
+        return self.ser is not None
+
+    def attach(self, log_q: queue.Queue):
+        self.log_q = log_q
+
+    def _log(self, tag: str, text: str):
+        if self.log_q is not None:
+            self.log_q.put((tag, text))
+
+    def connect(self, port: str, on_result):
+        """백그라운드로 포트 열기 + 리셋 대기. 끝나면 on_result(ok) 를 Tk 스레드 밖에서 호출."""
+        if self.connected or self._connecting:
+            return
+        try:
+            import serial
+        except ImportError:
+            self._log("err", "pyserial 없음 — capstone2 conda 환경에서 gui.py 를 실행하세요.\n")
+            on_result(False)
+            return
+        self._connecting = True
+
+        def worker():
+            try:
+                ser = serial.Serial(port, 115200, timeout=0.2)
+            except Exception as e:
+                self._log("err", f"포트 열기 실패: {e}\n")
+                self._connecting = False
+                on_result(False)
+                return
+            time.sleep(2.0)                     # 포트 열면 아두이노가 리셋됨
+            ser.reset_input_buffer()            # 부팅 배너 버림
+            self.ser, self.port = ser, port
+            self._stop.clear()
+            threading.Thread(target=self._reader, daemon=True).start()
+            self._connecting = False
+            self._log("done", f"[연결됨] {port} — 아두이노 리셋됨: 레일은 INIT 부터.\n")
+            on_result(True)
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def disconnect(self):
+        self._stop.set()
+        ser, self.ser = self.ser, None
+        if ser is not None:
+            try:
+                ser.close()
+            except Exception:
+                pass
+            self._log("note", "[연결 끊김]\n")
+
+    def send(self, cmd: str) -> bool:
+        if self.ser is None:
+            self._log("warn", "먼저 '연결' 하세요.\n")
+            return False
+        self._log("cmd", f"> {cmd}\n")
+        try:
+            self.ser.write((cmd + "\n").encode("ascii"))
+            self.ser.flush()
+            return True
+        except Exception as e:
+            self._log("err", f"송신 실패: {e}\n")
+            return False
+
+    def _reader(self):
+        while not self._stop.is_set():
+            ser = self.ser
+            if ser is None:
+                return
+            try:
+                line = ser.readline().decode("ascii", errors="replace").strip()
+            except Exception as e:
+                if not self._stop.is_set():
+                    self._log("err", f"수신 오류: {e}\n")
+                    self.ser = None
+                return
+            if line:
+                self._log("err" if line.startswith("ERROR") else "out", line + "\n")
+
+
+LINK = SerialLink()
+
+
+def release_link(log_q: queue.Queue):
+    """서브프로세스가 같은 포트를 열어야 할 때 GUI 연결을 먼저 놓는다."""
+    if LINK.connected:
+        LINK.disconnect()
+        log_q.put(("note", "GUI 시리얼 연결을 해제하고 실행합니다.\n"))
+
+
+# ============================================================
 #  Screen 기반 전환
 # ============================================================
 class Screen:
@@ -245,7 +378,42 @@ class Screen:
         if back_to is not None:
             ttk.Button(bar, text="← 뒤로", width=10,
                        command=lambda: self.nav.go(back_to)).pack(side="left")
-        ttk.Label(bar, text=title, font=("Arial", 16, "bold")).pack(side="left", padx=20)
+        ttk.Label(bar, text=title, font=(UI_FONT, 16, "bold")).pack(side="left", padx=20)
+
+    # ---------- 공통: 아두이노 연결 바 (LINK 공유) ----------
+    def make_conn_bar(self):
+        cfg = ttk.LabelFrame(self.container, text="아두이노 연결 (레일 + 흡착 공유, 화면 이동해도 유지)")
+        cfg.pack(fill="x", padx=10, pady=4)
+        r = ttk.Frame(cfg); r.pack(fill="x", padx=8, pady=6)
+        ttk.Label(r, text="Arduino port").pack(side="left")
+        self.port = tk.StringVar(value=LINK.port)
+        ttk.Entry(r, textvariable=self.port, width=28).pack(side="left", padx=(4, 16))
+        self.btn_conn = ttk.Button(r, width=10, command=self._toggle_conn)
+        self.btn_conn.pack(side="left", padx=4)
+        self.conn_status = tk.StringVar()
+        ttk.Label(r, textvariable=self.conn_status, foreground="#666").pack(side="left", padx=8)
+        self._refresh_conn()
+
+    def _refresh_conn(self):
+        try:
+            if LINK.connected:
+                self.btn_conn.config(text="연결 끊기", state="normal")
+                self.conn_status.set(f"연결됨: {LINK.port}")
+            else:
+                self.btn_conn.config(text="연결", state="normal")
+                self.conn_status.set("연결 안 됨")
+        except tk.TclError:
+            pass
+
+    def _toggle_conn(self):
+        if LINK.connected:
+            LINK.disconnect()
+            self._refresh_conn()
+            return
+        self.btn_conn.config(state="disabled")
+        self.conn_status.set("연결 중… (아두이노 리셋 대기 2 s)")
+        LINK.connect(self.port.get(),
+                     lambda ok: self.root.after(0, self._refresh_conn))
 
     # ---------- 공통: 로그 영역 ----------
     def make_log(self, parent=None, height=12) -> scrolledtext.ScrolledText:
@@ -253,12 +421,13 @@ class Screen:
         logf = ttk.LabelFrame(parent, text="로그")
         logf.pack(fill="both", expand=True, padx=10, pady=10)
         log = scrolledtext.ScrolledText(logf, height=height, wrap="word",
-                                         font=("Menlo" if IS_MAC else "Monospace", 10))
+                                         font=(MONO_FONT, 10))
         log.pack(fill="both", expand=True, padx=4, pady=4)
         for tag, color in (("cmd", "#005fa3"), ("warn", "#aa6600"),
                            ("err", "#b00020"), ("done", "#2a7a2a"), ("note", "#555555")):
             log.tag_config(tag, foreground=color)
         self.log = log
+        LINK.attach(self.log_q)                # 아두이노 수신 줄은 지금 화면 로그로
         self._start_log_pump()
         return log
 
@@ -314,9 +483,9 @@ class WelcomeScreen(Screen):
         wrap = (ttk.Frame(self.container))
         wrap.pack(expand=True, fill="both", padx=40, pady=40)
 
-        ttk.Label(wrap, text="ManiBox", font=("Arial", 36, "bold")).pack(pady=(40, 10))
+        ttk.Label(wrap, text="ManiBox", font=(UI_FONT, 36, "bold")).pack(pady=(40, 10))
         ttk.Label(wrap, text="Automated Truck Packing",
-                  font=("Arial", 14)).pack(pady=(0, 40))
+                  font=(UI_FONT, 14)).pack(pady=(0, 40))
 
         btns = ttk.Frame(wrap); btns.pack(pady=20)
         ttk.Button(btns, text="▶  실행", width=18,
@@ -400,9 +569,9 @@ class ExecutionInferenceScreen(Screen):
 
         info = (ttk.Frame(self.container)); info.pack(fill="x", padx=20, pady=20)
         self.status = tk.StringVar(value="추론 시작 중…")
-        ttk.Label(info, textvariable=self.status, font=("Arial", 13)).pack()
+        ttk.Label(info, textvariable=self.status, font=(UI_FONT, 13)).pack()
         self.pct = tk.StringVar(value="0%")
-        ttk.Label(info, textvariable=self.pct, font=("Arial", 24, "bold")).pack(pady=10)
+        ttk.Label(info, textvariable=self.pct, font=(UI_FONT, 24, "bold")).pack(pady=10)
 
         self.bar = ttk.Progressbar(self.root, mode="indeterminate", length=600)
         self.bar.pack(padx=20, pady=10)
@@ -478,6 +647,7 @@ class ExecutionRunScreen(Screen):
         if self.runner.is_running():
             self.log_q.put(("note", "이전 작업 중지 후 새로 시작 ...\n"))
             self.runner.stop()
+        release_link(self.log_q)
         py = python_cmd(need_viewer=True)
         argv = [py, "manager/main.py", "--mode", "dual",
                 "--moves", str(self._moves),
@@ -505,7 +675,7 @@ class DeveloperMenuScreen(Screen):
             ("Arm",             ArmDevScreen,         "demo 녹화 + 함수 호출 테스트"),
             ("Suction",         SuctionDevScreen,     "ON / OFF 토글 테스트"),
             ("Camera",          CameraDevScreen,      "wrist + overview RGB 표시"),
-            ("Rail",            RailDevScreen,        "rail 함수 호출 테스트"),
+            ("Rail",            RailDevScreen,        "INIT / MOVE / H / SPEED 직접 명령"),
         ]
         for i, (label, cls, desc) in enumerate(items):
             fr = ttk.Frame(grid); fr.pack(fill="x", pady=4)
@@ -626,6 +796,7 @@ class ArmDevScreen(Screen):
                "--name", self.name.get(), "--backend", "real",
                "--can", self.can.get()]
         if self.port.get():
+            release_link(self.log_q)
             cmd += ["--port", self.port.get()]
         shell = f'cd "{ROOT}" && {" ".join(cmd)}; echo; echo "[종료]"; read -n 1'
         if IS_MAC:
@@ -648,6 +819,7 @@ class ArmDevScreen(Screen):
         else:
             call = f"skills.{func}(robot)"
         if self.use_real_call.get():
+            release_link(self.log_q)
             port = self.port.get() or "/dev/ttyACM0"
             robot_init = (
                 f"robot = Robot.dual(s.m, s.d, "
@@ -689,48 +861,25 @@ class ArmDevScreen(Screen):
 
 
 class SuctionDevScreen(Screen):
-    """suction 개발 — ON/OFF 테스트."""
+    """suction 개발 — ON/OFF. Rail 화면과 같은 시리얼 연결(LINK) 을 쓴다.
+    grip() / un_grip() 은 RealSuction 에서 on() / off() 와 같은 "ON" / "OFF" 전송이라 따로 두지 않는다."""
 
     def build(self):
         self.root.title("개발자 — suction")
         self.header("suction 테스트", back_to=DeveloperMenuScreen)
+        self.make_conn_bar()
 
-        cfg = (ttk.LabelFrame(self.container, text="연결 설정"))
-        cfg.pack(fill="x", padx=10, pady=4)
-        r = ttk.Frame(cfg); r.pack(fill="x", padx=8, pady=6)
-        ttk.Label(r, text="Arduino port").pack(side="left")
-        self.port = tk.StringVar(value="/dev/tty.usbmodem0001" if IS_MAC else "/dev/ttyACM0")
-        ttk.Entry(r, textvariable=self.port, width=28).pack(side="left", padx=(4, 16))
-
-        btns = (ttk.LabelFrame(self.container, text="테스트"))
+        btns = (ttk.LabelFrame(self.container, text="흡착 (= grip() / un_grip())"))
         btns.pack(fill="x", padx=10, pady=4)
         row = ttk.Frame(btns); row.pack(fill="x", padx=8, pady=10)
-        ttk.Button(row, text="ON", width=12, command=lambda: self._send("on")).pack(side="left", padx=8)
-        ttk.Button(row, text="OFF", width=12, command=lambda: self._send("off")).pack(side="left", padx=8)
-        ttk.Button(row, text="grip()", width=12,
-                   command=lambda: self._send("grip")).pack(side="left", padx=8)
-        ttk.Button(row, text="un_grip()", width=12,
-                   command=lambda: self._send("ungrip")).pack(side="left", padx=8)
+        ttk.Button(row, text="ON  (grip)", width=14,
+                   command=lambda: LINK.send("ON")).pack(side="left", padx=8)
+        ttk.Button(row, text="OFF  (un_grip)", width=14,
+                   command=lambda: LINK.send("OFF")).pack(side="left", padx=8)
+        ttk.Button(row, text="STATUS", width=10,
+                   command=lambda: LINK.send("STATUS")).pack(side="left", padx=8)
 
         self.make_log(height=12)
-
-    def _send(self, cmd: str):
-        """suction.py 의 함수를 호출하는 1회성 파이썬 서브프로세스."""
-        map_ = {
-            "on":     "s.on()",
-            "off":    "s.off()",
-            "grip":   "s.grip()",
-            "ungrip": "s.un_grip()",
-        }
-        script = (
-            "import sys; sys.path.insert(0, 'modules/suction'); "
-            "sys.path.insert(0, 'manager'); "
-            "import arduino as a; from suction import RealSuction; "
-            f"ard = a.init_shared('{self.port.get()}'); "
-            "s = RealSuction(ard); "
-            f"{map_[cmd]}; print('{cmd} OK, holding =', s.holding())"
-        )
-        self.runner.start([sys.executable, "-c", script])
 
 
 class CameraDevScreen(Screen):
@@ -783,51 +932,102 @@ class CameraDevScreen(Screen):
 
 
 class RailDevScreen(Screen):
-    """rail 개발 — Rail.command / Rail.mv / home 테스트."""
+    """rail 개발 — 아두이노에 직접 INIT / MOVE / H / SPEED / ACCEL. 연결은 LINK (Suction 화면과 공유)."""
+
+    SPEED_MAX_MM_S = 400.0      # 펌웨어: SPEED * stepsPerMM(2000/150) <= MAX_SPEED(5400)
+    ACCEL_MAX_MM_S2 = 1500.0    # 펌웨어: ACCEL * stepsPerMM <= MAX_ACCEL(20000)
 
     def build(self):
         self.root.title("개발자 — rail")
         self.header("rail 테스트", back_to=DeveloperMenuScreen)
+        self.make_conn_bar()
 
-        cfg = (ttk.LabelFrame(self.container, text="연결"))
-        cfg.pack(fill="x", padx=10, pady=4)
-        r = ttk.Frame(cfg); r.pack(fill="x", padx=8, pady=6)
-        ttk.Label(r, text="Arduino port").pack(side="left")
-        self.port = tk.StringVar(value="/dev/tty.usbmodem0001" if IS_MAC else "/dev/ttyACM0")
-        ttk.Entry(r, textvariable=self.port, width=28).pack(side="left", padx=(4, 16))
+        ctl = (ttk.LabelFrame(self.container, text="레일 명령 (아두이노 좌표 mm, 0 = 모터 반대쪽 끝)"))
+        ctl.pack(fill="x", padx=10, pady=4)
+
+        r1 = ttk.Frame(ctl); r1.pack(fill="x", padx=8, pady=6)
+        ttk.Button(r1, text="INIT (현재 위치 = 0)", width=20,
+                   command=lambda: self._send("INIT")).pack(side="left", padx=4)
+        ttk.Button(r1, text="H (홈 복귀)", width=14,
+                   command=lambda: self._send("H")).pack(side="left", padx=4)
+        ttk.Button(r1, text="■ STOP", width=10,
+                   command=lambda: self._send("STOP")).pack(side="left", padx=4)
+        ttk.Button(r1, text="POS", width=8,
+                   command=lambda: self._send("POS")).pack(side="left", padx=4)
+
+        r2 = ttk.Frame(ctl); r2.pack(fill="x", padx=8, pady=6)
+        ttk.Label(r2, text="MOVE (mm, 0~1000)").pack(side="left")
+        self.move_mm = tk.StringVar(value="100")
+        e_move = ttk.Entry(r2, textvariable=self.move_mm, width=10)
+        e_move.pack(side="left", padx=(4, 4))
+        e_move.bind("<Return>", lambda _e: self._move())
+        ttk.Button(r2, text="MOVE", width=10, command=self._move).pack(side="left", padx=(0, 24))
+
+        ttk.Label(r2, text=f"SPEED (mm/s, ~{self.SPEED_MAX_MM_S:.0f})").pack(side="left")
+        self.speed_mm = tk.StringVar(value="400")
+        e_speed = ttk.Entry(r2, textvariable=self.speed_mm, width=10)
+        e_speed.pack(side="left", padx=(4, 4))
+        e_speed.bind("<Return>", lambda _e: self._speed())
+        ttk.Button(r2, text="SPEED 설정", width=12, command=self._speed).pack(side="left")
+
+        r3 = ttk.Frame(ctl); r3.pack(fill="x", padx=8, pady=6)
+        ttk.Label(r3, text=f"ACCEL (mm/s², ~{self.ACCEL_MAX_MM_S2:.0f}) — 낮으면 출발·정지가 굼뜸").pack(side="left")
+        self.accel_mm = tk.StringVar(value="1500")
+        e_accel = ttk.Entry(r3, textvariable=self.accel_mm, width=10)
+        e_accel.pack(side="left", padx=(4, 4))
+        e_accel.bind("<Return>", lambda _e: self._accel())
+        ttk.Button(r3, text="ACCEL 설정", width=12, command=self._accel).pack(side="left")
 
         tests = (ttk.LabelFrame(self.container, text="테스트 (test.py rail 전체)"))
         tests.pack(fill="x", padx=10, pady=4)
-        row = ttk.Frame(tests); row.pack(fill="x", padx=8, pady=10)
+        row = ttk.Frame(tests); row.pack(fill="x", padx=8, pady=6)
         ttk.Button(row, text="전체 테스트 (test.py rail)", width=24,
                    command=self._full).pack(side="left", padx=4)
-        ttk.Button(row, text="home() 복귀", width=16,
-                   command=lambda: self._single("home")).pack(side="left", padx=4)
-        ttk.Button(row, text="mv(0.5) CF x", width=16,
-                   command=lambda: self._single("mv_half")).pack(side="left", padx=4)
         ttk.Button(row, text="■ Stop", width=10,
                    command=self.runner.stop).pack(side="left", padx=4)
+        ttk.Label(row, text="※ 실행 시 GUI 연결 자동 해제", foreground="#666").pack(side="left", padx=8)
 
-        self.make_log(height=14)
+        self.make_log(height=12)
+
+    # ---------- 명령 ----------
+    def _send(self, cmd: str):
+        LINK.send(cmd)
+
+    @staticmethod
+    def _parse(text: str):
+        try:
+            return float(text)
+        except ValueError:
+            return None
+
+    def _move(self):
+        mm = self._parse(self.move_mm.get())
+        if mm is None or not (0.0 <= mm <= 1000.0):
+            self.log_q.put(("err", f"MOVE 값은 0 ~ 1000 mm: {self.move_mm.get()!r}\n"))
+            return
+        self._send(f"MOVE {mm:.3f}")
+
+    def _speed(self):
+        v = self._parse(self.speed_mm.get())
+        if v is None or not (0.0 < v <= self.SPEED_MAX_MM_S):
+            self.log_q.put(("err", f"SPEED 값은 0 < v <= {self.SPEED_MAX_MM_S:.0f} mm/s: "
+                                   f"{self.speed_mm.get()!r}\n"))
+            return
+        self._send(f"SPEED {v:g}")
+
+    def _accel(self):
+        v = self._parse(self.accel_mm.get())
+        if v is None or not (0.0 < v <= self.ACCEL_MAX_MM_S2):
+            self.log_q.put(("err", f"ACCEL 값은 0 < v <= {self.ACCEL_MAX_MM_S2:.0f} mm/s²: "
+                                   f"{self.accel_mm.get()!r}\n"))
+            return
+        self._send(f"ACCEL {v:g}")
 
     def _full(self):
+        release_link(self.log_q)
+        self._refresh_conn()
         argv = [sys.executable, "test.py", "rail", "--port", self.port.get()]
         self.runner.start(argv)
-
-    def _single(self, kind: str):
-        code = {
-            "home": "r.home(); print('home OK, read =', r.read())",
-            "mv_half": "r.mv(0.5); print('mv(0.5) OK, read =', r.read())",
-        }[kind]
-        script = (
-            "import sys; sys.path.insert(0, 'modules/rail'); "
-            "sys.path.insert(0, 'modules/transform'); "
-            "sys.path.insert(0, 'manager'); "
-            "import arduino as a; from rail import RealRail; "
-            f"ard = a.init_shared('{self.port.get()}'); r = RealRail(ard); "
-            f"{code}"
-        )
-        self.runner.start([sys.executable, "-c", script])
 
 
 # ============================================================
@@ -845,6 +1045,7 @@ def main():
     root.title("ManiBox")
     root.geometry("1000x720+120+60")
     root.minsize(1000, 720)
+    _apply_fonts(root)
     _apply_icon(root)
 
     nav = Navigator(root)
@@ -855,6 +1056,8 @@ def main():
         root.mainloop()
     except KeyboardInterrupt:
         print("[gui] 종료 (Ctrl-C)", flush=True)
+    finally:
+        LINK.disconnect()
 
 
 if __name__ == "__main__":

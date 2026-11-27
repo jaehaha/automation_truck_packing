@@ -41,11 +41,11 @@ const float MIN_MM = 0.0;
 const float MAX_MM = 1000.0;
 const float HOME_MM = 0.0;
 
-float speedSteps = 1000.0;
-float accelSteps = 1000.0;
+float speedSteps = 400.0 * 2000.0 / 150.0;    // 400 mm/s (= 5333 steps/s)
+float accelSteps = 1500.0 * 2000.0 / 150.0;   // 1500 mm/s^2 (= 20000 steps/s^2)
 
-const float MAX_SPEED = 4000.0;
-const float MAX_ACCEL = 3000.0;
+const float MAX_SPEED = 5400.0;   // 400 mm/s * 13.333 steps/mm = 5333
+const float MAX_ACCEL = 20100.0;  // 1500 mm/s^2 (= 20000) + float 오차 여유
 
 // =====================================
 // RANDOM TEST SETTINGS
