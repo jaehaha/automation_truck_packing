@@ -2,7 +2,7 @@
 
 - 프레임 기둥·가로대 (바닥 레일, 세로 기둥, 상단 레일): [modules/arm/model/manibox_modified.xml:70-149](../../modules/arm/model/manibox_modified.xml#L70-L149)
 - 바닥판 (board_1~3): [modules/arm/model/manibox_modified.xml:154-156](../../modules/arm/model/manibox_modified.xml#L154-L156)
-- 벽 패널 (wall_front, wall_back, wall_end): [modules/arm/model/manibox_modified.xml:159-161](../../modules/arm/model/manibox_modified.xml#L159-L161)
+- 벽 패널 (wall_end, wall_partition): [modules/arm/model/manibox_modified.xml:166-170](../../modules/arm/model/manibox_modified.xml#L166-L170). wall_front·wall_back 은 제거됨
 - 바닥판 윗면 z 상수: [modules/arm/stacking.py:32](../../modules/arm/stacking.py#L32) (`FLOOR = 0.04`) — 상자 바닥이 닿는 월드 z. 모델의 `board_1/2/3` 윗면과 일치.
 - 공구 끝 최고 높이: [modules/arm/stacking.py:44](../../modules/arm/stacking.py#L44) (`MV_CUP_POS = 0.47`)
 
@@ -23,9 +23,9 @@
 
 ### 레일 구동 범위 위치
 
-- 레일 슬라이드 조인트 범위 (−0.49 ~ +0.51 m): [modules/arm/model/manibox_modified.xml:165](../../modules/arm/model/manibox_modified.xml#L165)
+- 레일 슬라이드 조인트 범위 (0 ~ 1.0 m, 0 = 투입 위치쪽 끝): [modules/arm/model/manibox_modified.xml:173](../../modules/arm/model/manibox_modified.xml#L173)
 - 레일 액추에이터 제어 범위: [modules/arm/model/manibox_modified.xml:240](../../modules/arm/model/manibox_modified.xml#L240)
-- 레일 0 일 때 팔 베이스의 월드 좌표: [modules/arm/stacking.py:31](../../modules/arm/stacking.py#L31) (`ORIGIN = (0.700, 0.280, 0.672)`)
+- 레일 0 (투입 위치쪽 끝) 일 때 팔 베이스의 월드 좌표: [modules/arm/stacking.py:31](../../modules/arm/stacking.py#L31) (`ORIGIN = (0.210, 0.280, 0.672)`)
 
 ### 투입 위치 + 투입 공간 크기 + 창고 크기
 

@@ -12,7 +12,8 @@
 | `actions.py` | 사이클 호출 — `packing(box)`, `unpacking(box)`. arm 동작은 [`modules/arm/skills.py`](../modules/arm/skills.py), 흡착은 [`Suction.grip/un_grip`](../modules/suction/suction.py), 레일은 [`Rail.mv`](../modules/rail/rail.py) |
 | `boxes.py` | `BoxTable` — id → `{size, current, goal, state}` 상자 표 |
 | `arduino.py` | 레일·흡착이 공유하는 시리얼 연결 (`send / drain / init_shared`) |
-| `demos/*.npz` | 사용자 녹화 궤적·자세 (`mv_pos`, `approach_to_buffer`) |
+| `demos/*.npz` | 사용자 녹화 궤적·자세 (`mv_pos`, `approach_to_buffer`) — 녹화: `demos/record.py` |
+| `sequence/moves_*.json` | Packing Model 출력 (적재 순서 + 상자 goal). `main.py` 가 여기서 읽는다 |
 
 ## 실행
 

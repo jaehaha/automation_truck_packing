@@ -58,11 +58,28 @@ def _load_demo(name: str):
     z = np.load(path)
     return z["waypoints"]
 
+def reset(robot, speed: float = 0.3):
+    """관절(j1~j6) + 레일 모두 0 으로 복귀.
+
+    robot.follow 가 매 보간 step 에서 `rail.command(x)` + `arm.command(q)` 를 동시에 호출해
+    레일과 관절이 함께 선형으로 0 까지 이동. (Rail.mv/home 도 결국 내부에서 command 를 호출.)
+    """
+    state = robot.state()
+    cur = np.concatenate(([state.rail], state.q))     # [rail, j1..j6] 현재
+    tgt = np.zeros(7)                                  # 레일 + 관절 전부 0
+    robot.follow([cur, tgt], speed=speed)
+
 
 def mv_pos(robot, speed: float = 0.3):
-    """레일 이동 자세로 이동. manager/demos/mv_pos.npz 에 녹화된 자세 사용."""
-    wps = _load_demo("mv_pos")
-    robot.follow(wps, speed=speed)
+    """레일 이동 자세로 이동 — 관절(j1~j6) 만 0 으로. 레일은 현재 위치 유지.
+
+    rail 이동 중에도 팔이 프레임·벽에 안 걸리는 "운반 자세" 역할.
+    reset 과 차이: reset 은 레일도 0 으로, mv_pos 는 레일 유지.
+    """
+    state = robot.state()
+    cur = np.concatenate(([state.rail], state.q))                    # [rail, j1..j6] 현재
+    tgt = np.array([state.rail, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])       # 레일 유지, 관절 0
+    robot.follow([cur, tgt], speed=speed)
 
 
 def approach_to_buffer(robot, speed: float = 0.3):

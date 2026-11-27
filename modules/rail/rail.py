@@ -9,7 +9,7 @@
                    팔 베이스가 x_cf - APPROACH_X_OFFSET 에 설 수 있는 위치로.
                    x_cf == 0 은 홈 복귀 (actions 에서 사이클 끝의 rail(0) 용).
 
-범위는 MuJoCo 모델 (modules/arm/model/manibox_modified.xml:165) 의 조인트 range 와 같다: −0.49 ~ +0.51 m.
+범위는 MuJoCo 모델 조인트 range 와 같다: **0 ~ 1.0 m** (0 = 투입 위치쪽 끝, 1.0 = 반대 끝).
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ import transform as _cf                                     # noqa: E402
 
 
 class Rail(ABC):
-    RANGE = (-0.49, 0.51)   # m (로봇 좌표계)
+    RANGE = (0.0, 1.0)      # m (로봇 좌표계) — 0 = 투입 위치쪽 끝, 1.0 = 반대 끝
     APPROACH_X_OFFSET = 0.015   # m — 팔 베이스가 상자 CF x 보다 이 만큼 뒤에 서도록
 
     @abstractmethod
@@ -81,7 +81,7 @@ class SimRail(Rail):
 
 class RealRail(Rail):
     """실물: modules/rail_suction.ino 펌웨어가 올라간 공유 아두이노를 쓴다.
-    아두이노 좌표는 0 ~ 1000 mm, Rail API 좌표는 Rail.RANGE (−0.49 ~ +0.51 m, RC 기준).
+    아두이노 좌표는 0 ~ 1000 mm, Rail API 좌표는 Rail.RANGE (0 ~ 1.0 m, RC 기준 — 둘이 바로 일치).
 
     두 좌표계의 매핑은 modules/transform/transform.py 의 RAIL_ZERO_CF_X 를 거쳐 통일한다. 다만 지금 Sequencer
     는 아직 MuJoCo/RC 좌표로 돌아가므로 과도기에 호환 매개변수 `zero_offset_m` 로 평행이동만 한다.
@@ -94,7 +94,7 @@ class RealRail(Rail):
     타이밍 A: MOVE 도중 새 MOVE 는 아두이노가 "busy" 로 거부 → 조용히 무시 → 다음 호출로 따라감.
     """
 
-    def __init__(self, arduino, zero_offset_m: float = -0.49, auto_init: bool = True):
+    def __init__(self, arduino, zero_offset_m: float = 0.0, auto_init: bool = True):
         self.arduino = arduino
         self.zero_offset_m = zero_offset_m
         if auto_init:

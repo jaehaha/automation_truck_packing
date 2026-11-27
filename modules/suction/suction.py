@@ -5,14 +5,14 @@
   on()               -> 밸브 켬  (하드웨어 저수준)
   off()              -> 밸브 끔  (하드웨어 저수준)
   holding()          -> 지금 상자가 붙어 있는지 (압력 센서가 없으면 명령 상태 반환)
-  grip(mode)         -> 상자 집기. 현재는 on() 과 같지만, mode 로 추후 pack/unpack 분기 가능
-  un_grip()          -> 상자 놓기. off() 와 동일
+  grip()             -> 상자 집기 — ON 전송. 인자 없음.
+  un_grip()          -> 상자 놓기 — OFF 전송. 인자 없음.
 
 modules/rail_suction.ino 펌웨어는 "ON" / "OFF" 명령을 직접 받는다 (토글 아님).
 Python 쪽에서도 그대로 보내면 됨.
 
-호출 흐름: manager/actions.py → robot.suction.grip(mode)/un_grip().
-접근 motion (호버 → 접촉) 은 modules/arm/skills.py 의 alignment() 가 담당한다.
+호출 흐름: manager/actions.py → robot.suction.grip()/un_grip().
+접근 motion (호버 → 접촉) 은 modules/arm/skills.py 의 alignment() 가 담당.
 """
 from __future__ import annotations
 
@@ -28,17 +28,12 @@ class Suction(ABC):
     def holding(self) -> bool: ...
 
     # ---------- 고수준 API (actions.py 가 호출) ----------
-    def grip(self, mode: str = "pack") -> None:
-        """상자 집기 — 흡착 ON. mode 는 pack/unpack 분기용 (현재는 동일).
-
-        호출 시점: skills.alignment(mode) 로 상자 면 접촉까지 접근한 뒤.
-        """
-        if mode not in ("pack", "unpack"):
-            raise ValueError(f"mode 는 'pack' 또는 'unpack': {mode}")
+    def grip(self) -> None:
+        """상자 집기 — ON 전송. skills.alignment() 로 상자 면 접촉 이후 호출."""
         self.on()
 
     def un_grip(self) -> None:
-        """상자 놓기 — 흡착 OFF."""
+        """상자 놓기 — OFF 전송."""
         self.off()
 
 

@@ -56,7 +56,11 @@ class SimArm(Arm):
 
 class RealArm(Arm):
     """실물 Piper. piper_sdk C_PiperInterface_V2 로 CAN 을 쓴다.
-    아직 미구현 — piper_keyboard.py 가 "한 관절씩 보간해서 움직이는" 참고 예시다."""
+    아직 미구현 — piper_keyboard.py 가 "한 관절씩 보간해서 움직이는" 참고 예시다.
+
+    TODO: command() 안에서 piper.MotionCtrl_2(0x01, MOVE_J, self._speed_percent, 0x00) 로
+          모터 속도 비율 전달. self._speed_percent 는 Robot.follow 가 set_speed_percent() 로 설정.
+    """
 
     def __init__(self, can: str = "can0"):
         raise NotImplementedError("실물 팔은 아직 연결 안 함. SimArm 을 쓴다.")
@@ -66,6 +70,10 @@ class RealArm(Arm):
 
     def command(self, q):
         raise NotImplementedError
+
+    def set_speed_percent(self, pct: int):
+        """Robot.follow 가 호출 — MotionCtrl_2 로 넘길 Piper 모터 속도 비율 (1-100)."""
+        self._speed_percent = int(pct)
 
 
 class DualArm(Arm):
@@ -81,3 +89,7 @@ class DualArm(Arm):
         q = self._check(q)
         self.real.command(q)
         self.sim.command(q)
+
+    def set_speed_percent(self, pct: int):
+        if hasattr(self.real, "set_speed_percent"):
+            self.real.set_speed_percent(pct)

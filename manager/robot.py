@@ -103,13 +103,21 @@ class Robot:
         self.suction.off()
 
     # ------- 경로 추종 -------
-    def follow(self, waypoints: list[np.ndarray], speed: float = 0.3,
+    def follow(self, waypoints: list[np.ndarray], speed: float = 1.0,
                box_follow: Callable | None = None):
         """경유점 사이를 선형으로 보간해 레일·팔에 동시에 명령.
-        box_follow(q) 는 들고 있는 상자를 공구에 맞춰 옮기는 콜백 (시뮬 전용)."""
+
+        speed: 모터 속도 배율. 1.0 = 기본 (sim 보간 step 사이 0.02 s sleep),
+               4.0 = 4 배 빠름 (sleep 0.005 s). 실물 Piper 연결 시 RealArm 가
+               self._piper_speed_percent 로 변환해 MotionCtrl_2 에 전달한다.
+        box_follow(q) 는 들고 있는 상자를 공구에 맞춰 옮기는 콜백 (시뮬 전용).
+        """
         self._stopped = False
         if len(waypoints) < 2:
             return
+        # 실물 Piper 가 속도 비율을 받을 수 있게 미리 넣어 둠 (RealArm 이 참조)
+        if hasattr(self.arm, "set_speed_percent"):
+            self.arm.set_speed_percent(int(np.clip(speed * 100, 1, 100)))
         for a, b in zip(waypoints[:-1], waypoints[1:]):
             a = np.asarray(a, float); b = np.asarray(b, float)
             diff = b - a

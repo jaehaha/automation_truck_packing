@@ -46,7 +46,7 @@ from numpy.lib.stride_tricks import sliding_window_view
 C_ORIGIN = np.array([1.241, 0.52, 0.052])   # 컨테이너 원점의 월드 좌표 (m). 컨테이너 x = 월드 -x, y = 월드 -y
                                             # 경인 최종 도면 (handoff/ManiBox_Floor_Panels_Dimensions): 적재 X41 ~ X1241 (안쪽 끝 = 구획선 X1241),
                                             # 바닥판 윗면 z 0.052 (판 12 mm, 로봇 장착면은 바닥판 위 620 mm). 이전 값 (1.52, 0.52, 0.043)
-ROBOT_ORIGIN = np.array([0.700, 0.280, 0.672])   # 로봇 좌표계 원점의 월드 좌표 (레일 0 일 때 팔 베이스). 플래너 쪽 값과 같아야 한다
+ROBOT_ORIGIN = np.array([0.210, 0.280, 0.672])   # 로봇 좌표계 원점의 월드 좌표 (레일 0 = 투입 위치쪽 끝 일 때 팔 베이스). stacking.ORIGIN 과 일치해야 함
 
 # 종류 -> (가로 L, 세로 W, 높이 H) mm. 흡착면 = L x W (투입 칸에서 윗면).
 BOX_TYPES = {1: (80, 80, 80), 2: (80, 80, 100), 3: (160, 80, 80), 4: (160, 80, 100), 5: (160, 160, 100)}

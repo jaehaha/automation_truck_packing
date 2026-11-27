@@ -36,7 +36,41 @@ from robot import Robot                               # noqa: E402
 from actions import pick_and_place                    # noqa: E402
 from boxes import BoxTable                            # noqa: E402
 
-MOVES = ROOT / "modules" / "packing_algorithm" / "examples" / "list" / "moves_big.json"
+MOVES = HERE / "sequence" / "moves.json"           # Packing Model 추론 결과 (표준 위치)
+# 이전 호환: moves.json 이 없고 moves_big.json 만 있으면 그걸 쓴다
+if not MOVES.exists() and (HERE / "sequence" / "moves_big.json").exists():
+    MOVES = HERE / "sequence" / "moves_big.json"
+
+
+# ---- 뷰어 상태 오버레이 (왼쪽 위에 현재 박스 정보) ----
+# user_scn 에 라벨만 가진 투명 구를 하나 두고, 뷰 좌상단에 보이도록 월드 좌표를 잡는다.
+# VIEW azimuth/elevation 기준으로 왼쪽 위에 해당하는 CF 영역 ≈ (x=0.0, y=0.56, z=1.0).
+_STATUS_ANCHOR = np.array([0.00, 0.56, 1.00])
+
+class _ViewerClosed(Exception):
+    """뷰어 창이 사용자에 의해 닫혔음을 알리는 신호. step_cb 에서 발생, 재생 루프가 잡아 깔끔 종료."""
+    pass
+
+
+def _set_viewer_status(viewer_ctx, text: str):
+    """MuJoCo 뷰어 좌상단에 상태 문자열을 띄운다 (라벨 1 개). 창 없으면 무시."""
+    if viewer_ctx is None:
+        return
+    import mujoco as _mj
+    with viewer_ctx.lock():
+        scn = viewer_ctx.user_scn
+        if scn.ngeom == 0:
+            scn.ngeom = 1
+        g = scn.geoms[0]
+        _mj.mjv_initGeom(
+            g,
+            type=_mj.mjtGeom.mjGEOM_SPHERE,
+            size=np.array([0.001, 0.001, 0.001]),
+            pos=_STATUS_ANCHOR,
+            mat=np.eye(3).flatten(),
+            rgba=np.array([0.0, 0.0, 0.0, 0.0]),       # 투명 — 구는 안 보이고 라벨만
+        )
+        g.label = (text or "")[:99]                     # mjMAXLABEL = 100
 
 
 def load_manifest(path: Path) -> list[dict]:
@@ -72,7 +106,10 @@ def main():
     ap.add_argument("--port", default="/dev/tty.usbmodem0001", help="아두이노 시리얼 포트 (real/dual)")
     ap.add_argument("--can", default="can0", help="Piper 팔 CAN 인터페이스 (real/dual)")
     ap.add_argument("--no-view", action="store_true", help="뷰어 없이 돌린다 (sim 에서만 의미)")
-    ap.add_argument("--speed", type=float, default=4.0, help="재생 속도 배율 (sim 계열)")
+    ap.add_argument("--speed", type=float, default=1.0,
+                    help="모터 속도 배율. sim: 보간 step 사이 sleep 를 1/speed 로. "
+                         "real/dual: 향후 RealArm 가 Piper MotionCtrl_2 speed_percent (100 × speed, 0-100 clip) 로 전달. "
+                         "1.0 = 기본, 4.0 = 4배 빠름, 0.1 = 10배 느림 (안전).")
     args = ap.parse_args()
 
     # 모드별 뷰어 사용 여부 — real 은 뷰어 없음, dual 은 반드시 뷰어 있음
@@ -91,14 +128,20 @@ def main():
 
     # ---- 3. Robot 백엔드 (모드별) ----
     # seq.s 가 실제 장면. 시뮬·듀얼에서는 그 model/data 를 Robot 이 가져다 쓴다.
-    viewer_ctx = mujoco.viewer.launch_passive(seq.s.m, seq.s.d) if use_viewer else None
+    # 왼쪽 패널만 숨기고, 오른쪽 Control 패널은 유지 — 사용자가 슬라이더로 직접 액추에이터 조작 가능
+    viewer_ctx = (mujoco.viewer.launch_passive(seq.s.m, seq.s.d,
+                                               show_left_ui=False, show_right_ui=True)
+                  if use_viewer else None)
     try:
         if viewer_ctx is not None:
             set_view(viewer_ctx.cam)
-            for name in ("wall_front", "wall_back", "wall_end"):
+            for name in ("wall_end",):     # wall_front / wall_back 제거됨
                 seq.s.m.geom_rgba[seq.s.m.geom(name).id, 3] = 0.12
 
         def step_cb():
+            # 뷰어가 닫혔으면 즉시 중단 — 상위에서 잡아 cleanup 하고 subprocess 종료
+            if viewer_ctx is not None and not viewer_ctx.is_running():
+                raise _ViewerClosed()
             mujoco.mj_forward(seq.s.m, seq.s.d)
             if viewer_ctx is not None:
                 viewer_ctx.sync()
@@ -135,16 +178,31 @@ def main():
         # 2단계: 뷰어에서 skills 로 실행 재생 (장치들에 명령이 들어간다)
         for i in range(len(seq.s.types)):
             seq.s._hide(i)
-        for n, (e, p) in enumerate(plans):
-            if not viewer_ctx.is_running():
-                break
-            seq.s.spawn(p.index)
-            pick_and_place(robot, p, s=seq.s)
-            time.sleep(0.3 / max(args.speed, 1e-3))
+        total = len(plans)
+        try:
+            for n, (e, p) in enumerate(plans):
+                if not viewer_ctx.is_running():
+                    break
+                goal_cf = e.get("goal_cf", None)
+                if goal_cf is not None:
+                    goal_txt = f"goal_cf=({goal_cf[0]:.3f},{goal_cf[1]:.3f},{goal_cf[2]:.3f})"
+                else:
+                    g = e["goal"]
+                    goal_txt = f"goal=({g[0]:.3f},{g[1]:.3f},{g[2]:.3f})"
+                status = f"[Packing {n+1}/{total}]  {e['box_id']} type={e['type']}  {goal_txt}"
+                _set_viewer_status(viewer_ctx, status)
+                print(status, flush=True)
+                seq.s.spawn(p.index)
+                pick_and_place(robot, p, s=seq.s, speed=args.speed)
+                time.sleep(0.3 / max(args.speed, 1e-3))
 
-        # 재생이 끝난 뒤에도 창은 유지. 창 닫으면 종료.
-        while viewer_ctx.is_running():
-            time.sleep(0.1)
+            _set_viewer_status(viewer_ctx, f"[Packing 완료]  {total}/{total}  (창 닫으면 종료)")
+
+            # 재생이 끝난 뒤에도 창은 유지. 창 닫으면 종료.
+            while viewer_ctx.is_running():
+                time.sleep(0.1)
+        except _ViewerClosed:
+            print("\n[중단] 사용자가 뷰어를 닫음 — Packing 중지.", flush=True)
     finally:
         if viewer_ctx is not None:
             viewer_ctx.close()

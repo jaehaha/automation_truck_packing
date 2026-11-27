@@ -1,0 +1,9865 @@
+{
+ "frame": "robot (m) = world - robot_origin; axes = world",
+ "unit": "m",
+ "mode": "big",
+ "support_min": 0.9,
+ "zone": true,
+ "robot_origin_world_m": [
+  0.21,
+  0.28,
+  0.672
+ ],
+ "container_origin_world_m": [
+  1.241,
+  0.52,
+  0.052
+ ],
+ "container_mm": {
+  "depth": 1200,
+  "load_depth": 1200,
+  "width": 480,
+  "height": 568,
+  "axes": "x 출구 방향 = 월드 -x, y = 월드 -y, z 위"
+ },
+ "load_note": "목록 방식: 버퍼는 문 쪽 줄 가운데 투입 칸 (arrival) 하나뿐이고 나머지 바닥 전체가 적재 공간. 상자마다 로봇 이동 하나 (투입 칸 -> 끝 자리). 이동 순서 = feed_order (투입 칸에 넣는 순서)",
+ "buffer_cells_robot_m": {
+  "arrival": [
+   -0.074,
+   0.0,
+   -0.62
+  ]
+ },
+ "ik_note": null,
+ "box_types": {
+  "1": [
+   80,
+   80,
+   100
+  ],
+  "2": [
+   160,
+   80,
+   80
+  ],
+  "3": [
+   160,
+   80,
+   100
+  ],
+  "4": [
+   160,
+   160,
+   80
+  ],
+  "5": [
+   160,
+   160,
+   100
+  ]
+ },
+ "job": [
+  [
+   5,
+   3
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   3,
+   2
+  ],
+  [
+   5,
+   2
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   5,
+   2
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   6,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   3,
+   1
+  ],
+  [
+   4,
+   2
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   6,
+   3
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   6,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   3,
+   2
+  ],
+  [
+   5,
+   2
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   5,
+   2
+  ],
+  [
+   4,
+   2
+  ],
+  [
+   3,
+   4
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   4,
+   4
+  ],
+  [
+   5,
+   3
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   5,
+   3
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   2,
+   1
+  ],
+  [
+   5,
+   3
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   2,
+   4
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   1,
+   2
+  ],
+  [
+   1,
+   3
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   4,
+   3
+  ],
+  [
+   2,
+   4
+  ],
+  [
+   5,
+   1
+  ],
+  [
+   1,
+   4
+  ]
+ ],
+ "metrics": {
+  "util": 0.40336463223787145,
+  "util_rig": 0.40336463223787167,
+  "placed": 80,
+  "kept": 0,
+  "total": 80,
+  "left": 0,
+  "violations": 0,
+  "stage_moves": 0,
+  "retrieves": 0,
+  "moves": 80,
+  "moves_per_box": 1.0,
+  "reason": "done",
+  "rework": 0,
+  "rework_boxes": 0,
+  "rework_stops": 0,
+  "unstable_skipped": 0,
+  "twin_skipped": 0,
+  "motion_skipped": 0,
+  "boxes_skipped": 0,
+  "skip_log": [],
+  "motion_closed": false,
+  "seconds": 2.5335118770599365,
+  "ms_per_move": 31.668913364410397
+ },
+ "placements": [
+  {
+   "id": "b022",
+   "type": 5,
+   "stop": 6,
+   "o": 0,
+   "center": [
+    52.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P001"
+  },
+  {
+   "id": "b037",
+   "type": 5,
+   "stop": 6,
+   "o": 0,
+   "center": [
+    52.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P003"
+  },
+  {
+   "id": "b027",
+   "type": 3,
+   "stop": 6,
+   "o": 1,
+   "center": [
+    52.5,
+    42.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P002"
+  },
+  {
+   "id": "b005",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    52.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P007"
+  },
+  {
+   "id": "b007",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    52.5,
+    167.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P021"
+  },
+  {
+   "id": "b032",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    52.5,
+    82.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P024"
+  },
+  {
+   "id": "b049",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    52.5,
+    82.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P030"
+  },
+  {
+   "id": "b004",
+   "type": 2,
+   "stop": 5,
+   "o": 1,
+   "center": [
+    42.5,
+    207.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P008"
+  },
+  {
+   "id": "b006",
+   "type": 2,
+   "stop": 5,
+   "o": 1,
+   "center": [
+    42.5,
+    207.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P006"
+  },
+  {
+   "id": "b042",
+   "type": 2,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    42.5,
+    82.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P026"
+  },
+  {
+   "id": "b046",
+   "type": 2,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    42.5,
+    382.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P012"
+  },
+  {
+   "id": "b050",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    157.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P015"
+  },
+  {
+   "id": "b054",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    157.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P018"
+  },
+  {
+   "id": "b065",
+   "type": 5,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    157.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P016"
+  },
+  {
+   "id": "b001",
+   "type": 3,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    137.5,
+    382.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P025"
+  },
+  {
+   "id": "b010",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    147.5,
+    82.5,
+    80.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P027"
+  },
+  {
+   "id": "b057",
+   "type": 3,
+   "stop": 5,
+   "o": 1,
+   "center": [
+    157.5,
+    207.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P009"
+  },
+  {
+   "id": "b011",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    147.5,
+    82.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P004"
+  },
+  {
+   "id": "b060",
+   "type": 3,
+   "stop": 5,
+   "o": 1,
+   "center": [
+    137.5,
+    207.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P014"
+  },
+  {
+   "id": "b030",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    147.5,
+    82.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P013"
+  },
+  {
+   "id": "b069",
+   "type": 3,
+   "stop": 5,
+   "o": 1,
+   "center": [
+    137.5,
+    207.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P019"
+  },
+  {
+   "id": "b008",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    52.5,
+    207.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P005"
+  },
+  {
+   "id": "b020",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    137.5,
+    42.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P022"
+  },
+  {
+   "id": "b040",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    252.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P010"
+  },
+  {
+   "id": "b070",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    252.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P017"
+  },
+  {
+   "id": "b072",
+   "type": 4,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    252.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P011"
+  },
+  {
+   "id": "b058",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    242.5,
+    352.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P023"
+  },
+  {
+   "id": "b073",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    242.5,
+    437.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P028"
+  },
+  {
+   "id": "b076",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    242.5,
+    42.5,
+    40.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P020"
+  },
+  {
+   "id": "b079",
+   "type": 1,
+   "stop": 5,
+   "o": 0,
+   "center": [
+    242.5,
+    42.5,
+    120.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P029"
+  },
+  {
+   "id": "b025",
+   "type": 2,
+   "stop": 4,
+   "o": 0,
+   "center": [
+    147.5,
+    167.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P032"
+  },
+  {
+   "id": "b077",
+   "type": 3,
+   "stop": 4,
+   "o": 1,
+   "center": [
+    242.5,
+    42.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P031"
+  },
+  {
+   "id": "b047",
+   "type": 2,
+   "stop": 4,
+   "o": 1,
+   "center": [
+    232.5,
+    42.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P034"
+  },
+  {
+   "id": "b056",
+   "type": 4,
+   "stop": 4,
+   "o": 0,
+   "center": [
+    252.5,
+    167.5,
+    80.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P033"
+  },
+  {
+   "id": "b048",
+   "type": 4,
+   "stop": 3,
+   "o": 0,
+   "center": [
+    237.5,
+    167.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P035"
+  },
+  {
+   "id": "b003",
+   "type": 2,
+   "stop": 3,
+   "o": 0,
+   "center": [
+    232.5,
+    167.5,
+    360.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P036"
+  },
+  {
+   "id": "b041",
+   "type": 2,
+   "stop": 3,
+   "o": 0,
+   "center": [
+    232.5,
+    167.5,
+    440.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P038"
+  },
+  {
+   "id": "b024",
+   "type": 1,
+   "stop": 3,
+   "o": 0,
+   "center": [
+    347.5,
+    42.5,
+    40.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P037"
+  },
+  {
+   "id": "b009",
+   "type": 2,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    232.5,
+    182.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P048"
+  },
+  {
+   "id": "b012",
+   "type": 5,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    347.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P052"
+  },
+  {
+   "id": "b028",
+   "type": 5,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    347.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P051"
+  },
+  {
+   "id": "b031",
+   "type": 5,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    347.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P047"
+  },
+  {
+   "id": "b063",
+   "type": 5,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    347.5,
+    167.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P045"
+  },
+  {
+   "id": "b026",
+   "type": 2,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    337.5,
+    382.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P040"
+  },
+  {
+   "id": "b017",
+   "type": 3,
+   "stop": 2,
+   "o": 1,
+   "center": [
+    347.5,
+    42.5,
+    160.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P044"
+  },
+  {
+   "id": "b071",
+   "type": 4,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    322.5,
+    167.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P039"
+  },
+  {
+   "id": "b078",
+   "type": 4,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    317.5,
+    182.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P041"
+  },
+  {
+   "id": "b036",
+   "type": 2,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    317.5,
+    197.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P046"
+  },
+  {
+   "id": "b045",
+   "type": 3,
+   "stop": 2,
+   "o": 1,
+   "center": [
+    347.5,
+    42.5,
+    320.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P042"
+  },
+  {
+   "id": "b013",
+   "type": 1,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    337.5,
+    42.5,
+    440.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P050"
+  },
+  {
+   "id": "b014",
+   "type": 1,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    242.5,
+    42.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P043"
+  },
+  {
+   "id": "b068",
+   "type": 1,
+   "stop": 2,
+   "o": 0,
+   "center": [
+    347.5,
+    42.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P049"
+  },
+  {
+   "id": "b002",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P076"
+  },
+  {
+   "id": "b015",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P075"
+  },
+  {
+   "id": "b023",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P063"
+  },
+  {
+   "id": "b038",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    82.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P056"
+  },
+  {
+   "id": "b039",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    82.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P054"
+  },
+  {
+   "id": "b052",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    82.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P062"
+  },
+  {
+   "id": "b033",
+   "type": 2,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    422.5,
+    382.5,
+    520.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P064"
+  },
+  {
+   "id": "b018",
+   "type": 3,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    452.5,
+    207.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P079"
+  },
+  {
+   "id": "b029",
+   "type": 3,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    417.5,
+    207.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P072"
+  },
+  {
+   "id": "b035",
+   "type": 3,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    412.5,
+    207.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P077"
+  },
+  {
+   "id": "b055",
+   "type": 3,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    452.5,
+    82.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P055"
+  },
+  {
+   "id": "b016",
+   "type": 1,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    412.5,
+    207.5,
+    520.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P067"
+  },
+  {
+   "id": "b059",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    557.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P058"
+  },
+  {
+   "id": "b064",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    557.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P068"
+  },
+  {
+   "id": "b066",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    557.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P074"
+  },
+  {
+   "id": "b067",
+   "type": 5,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    557.5,
+    82.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P059"
+  },
+  {
+   "id": "b075",
+   "type": 3,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    557.5,
+    207.5,
+    80.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P080"
+  },
+  {
+   "id": "b021",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    547.5,
+    82.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P070"
+  },
+  {
+   "id": "b034",
+   "type": 2,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    512.5,
+    207.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P069"
+  },
+  {
+   "id": "b043",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    547.5,
+    82.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P061"
+  },
+  {
+   "id": "b044",
+   "type": 2,
+   "stop": 1,
+   "o": 1,
+   "center": [
+    507.5,
+    207.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    80,
+    160
+   ],
+   "kept": false,
+   "box_id": "P066"
+  },
+  {
+   "id": "b051",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    652.5,
+    397.5,
+    80.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P060"
+  },
+  {
+   "id": "b053",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    652.5,
+    397.5,
+    240.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P071"
+  },
+  {
+   "id": "b061",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    652.5,
+    397.5,
+    400.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P078"
+  },
+  {
+   "id": "b080",
+   "type": 4,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    652.5,
+    82.5,
+    80.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    160
+   ],
+   "kept": false,
+   "box_id": "P057"
+  },
+  {
+   "id": "b019",
+   "type": 1,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    642.5,
+    42.5,
+    200.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P073"
+  },
+  {
+   "id": "b062",
+   "type": 1,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    642.5,
+    127.5,
+    200.0
+   ],
+   "dims_xyz": [
+    100,
+    80,
+    80
+   ],
+   "kept": false,
+   "box_id": "P053"
+  },
+  {
+   "id": "b074",
+   "type": 2,
+   "stop": 1,
+   "o": 0,
+   "center": [
+    632.5,
+    82.5,
+    280.0
+   ],
+   "dims_xyz": [
+    80,
+    160,
+    80
+   ],
+   "kept": false,
+   "box_id": "P065"
+  }
+ ],
+ "moves": [
+  {
+   "step": 1,
+   "box": "b022",
+   "type": 5,
+   "stop": 6,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 0,
+    "slots": {
+     "arrival": "b022"
+    }
+   },
+   "box_id": "P001"
+  },
+  {
+   "step": 2,
+   "box": "b037",
+   "type": 5,
+   "stop": 6,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 1,
+    "slots": {
+     "arrival": "b037"
+    }
+   },
+   "box_id": "P003"
+  },
+  {
+   "step": 3,
+   "box": "b027",
+   "type": 3,
+   "stop": 6,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     0.1975,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.9285,
+     0.1975,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     0.1975,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      42.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 2,
+    "slots": {
+     "arrival": "b027"
+    }
+   },
+   "box_id": "P002"
+  },
+  {
+   "step": 4,
+   "box": "b005",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 3,
+    "slots": {
+     "arrival": "b005"
+    }
+   },
+   "box_id": "P007"
+  },
+  {
+   "step": 5,
+   "box": "b007",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     0.0725,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     0.0725,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     0.0725,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      167.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 4,
+    "slots": {
+     "arrival": "b007"
+    }
+   },
+   "box_id": "P021"
+  },
+  {
+   "step": 6,
+   "box": "b032",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      82.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 5,
+    "slots": {
+     "arrival": "b032"
+    }
+   },
+   "box_id": "P024"
+  },
+  {
+   "step": 7,
+   "box": "b049",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      82.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 6,
+    "slots": {
+     "arrival": "b049"
+    }
+   },
+   "box_id": "P030"
+  },
+  {
+   "step": 8,
+   "box": "b004",
+   "type": 2,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9885,
+     0.0325,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.9485,
+     0.0325,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.9085,
+     0.0325,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      42.5,
+      207.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 7,
+    "slots": {
+     "arrival": "b004"
+    }
+   },
+   "box_id": "P008"
+  },
+  {
+   "step": 9,
+   "box": "b006",
+   "type": 2,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9885,
+     0.0325,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.9485,
+     0.0325,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.9085,
+     0.0325,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      42.5,
+      207.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 8,
+    "slots": {
+     "arrival": "b006"
+    }
+   },
+   "box_id": "P006"
+  },
+  {
+   "step": 10,
+   "box": "b042",
+   "type": 2,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9885,
+     0.1575,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9485,
+     0.1575,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.9085,
+     0.1575,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      42.5,
+      82.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 9,
+    "slots": {
+     "arrival": "b042"
+    }
+   },
+   "box_id": "P026"
+  },
+  {
+   "step": 11,
+   "box": "b046",
+   "type": 2,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9885,
+     -0.1425,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9485,
+     -0.1425,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.9085,
+     -0.1425,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      42.5,
+      382.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 10,
+    "slots": {
+     "arrival": "b046"
+    }
+   },
+   "box_id": "P012"
+  },
+  {
+   "step": 12,
+   "box": "b050",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8735,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8235,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7835,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      157.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 11,
+    "slots": {
+     "arrival": "b050"
+    }
+   },
+   "box_id": "P015"
+  },
+  {
+   "step": 13,
+   "box": "b054",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8735,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8235,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7835,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      157.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 12,
+    "slots": {
+     "arrival": "b054"
+    }
+   },
+   "box_id": "P018"
+  },
+  {
+   "step": 14,
+   "box": "b065",
+   "type": 5,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8735,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8235,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7835,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      157.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 13,
+    "slots": {
+     "arrival": "b065"
+    }
+   },
+   "box_id": "P016"
+  },
+  {
+   "step": 15,
+   "box": "b001",
+   "type": 3,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8935,
+     -0.1425,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     -0.1425,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     -0.1425,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      137.5,
+      382.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 14,
+    "slots": {
+     "arrival": "b001"
+    }
+   },
+   "box_id": "P025"
+  },
+  {
+   "step": 16,
+   "box": "b010",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8835,
+     0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      147.5,
+      82.5,
+      80.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 15,
+    "slots": {
+     "arrival": "b010"
+    }
+   },
+   "box_id": "P027"
+  },
+  {
+   "step": 17,
+   "box": "b057",
+   "type": 3,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8735,
+     0.0325,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.8235,
+     0.0325,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7835,
+     0.0325,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      157.5,
+      207.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 16,
+    "slots": {
+     "arrival": "b057"
+    }
+   },
+   "box_id": "P009"
+  },
+  {
+   "step": 18,
+   "box": "b011",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8835,
+     0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      147.5,
+      82.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 17,
+    "slots": {
+     "arrival": "b011"
+    }
+   },
+   "box_id": "P004"
+  },
+  {
+   "step": 19,
+   "box": "b060",
+   "type": 3,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8935,
+     0.0325,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.8435,
+     0.0325,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.0325,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      137.5,
+      207.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 18,
+    "slots": {
+     "arrival": "b060"
+    }
+   },
+   "box_id": "P014"
+  },
+  {
+   "step": 20,
+   "box": "b030",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8835,
+     0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      147.5,
+      82.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 19,
+    "slots": {
+     "arrival": "b030"
+    }
+   },
+   "box_id": "P013"
+  },
+  {
+   "step": 21,
+   "box": "b069",
+   "type": 3,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8935,
+     0.0325,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.8435,
+     0.0325,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.0325,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      137.5,
+      207.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 20,
+    "slots": {
+     "arrival": "b069"
+    }
+   },
+   "box_id": "P019"
+  },
+  {
+   "step": 22,
+   "box": "b008",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.9785,
+     0.0325,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.9285,
+     0.0325,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8885,
+     0.0325,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      52.5,
+      207.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 21,
+    "slots": {
+     "arrival": "b008"
+    }
+   },
+   "box_id": "P005"
+  },
+  {
+   "step": 23,
+   "box": "b020",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8935,
+     0.1975,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     0.1975,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.1975,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      137.5,
+      42.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 22,
+    "slots": {
+     "arrival": "b020"
+    }
+   },
+   "box_id": "P022"
+  },
+  {
+   "step": 24,
+   "box": "b040",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7785,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      252.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 23,
+    "slots": {
+     "arrival": "b040"
+    }
+   },
+   "box_id": "P010"
+  },
+  {
+   "step": 25,
+   "box": "b070",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7785,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      252.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 24,
+    "slots": {
+     "arrival": "b070"
+    }
+   },
+   "box_id": "P017"
+  },
+  {
+   "step": 26,
+   "box": "b072",
+   "type": 4,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7785,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      252.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 25,
+    "slots": {
+     "arrival": "b072"
+    }
+   },
+   "box_id": "P011"
+  },
+  {
+   "step": 27,
+   "box": "b058",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     -0.1125,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     -0.1125,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     -0.1125,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      352.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 26,
+    "slots": {
+     "arrival": "b058"
+    }
+   },
+   "box_id": "P023"
+  },
+  {
+   "step": 28,
+   "box": "b073",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     -0.1975,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     -0.1975,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     -0.1975,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      437.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 27,
+    "slots": {
+     "arrival": "b073"
+    }
+   },
+   "box_id": "P028"
+  },
+  {
+   "step": 29,
+   "box": "b076",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     0.1975,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     0.1975,
+     -0.58
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     0.1975,
+     -0.58
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      42.5,
+      40.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 28,
+    "slots": {
+     "arrival": "b076"
+    }
+   },
+   "box_id": "P020"
+  },
+  {
+   "step": 30,
+   "box": "b079",
+   "type": 1,
+   "stop": 5,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     0.1975,
+     -0.5
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     0.1975,
+     -0.5
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     0.1975,
+     -0.5
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      42.5,
+      120.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 29,
+    "slots": {
+     "arrival": "b079"
+    }
+   },
+   "box_id": "P029"
+  },
+  {
+   "step": 31,
+   "box": "b025",
+   "type": 2,
+   "stop": 4,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.8835,
+     0.0725,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.8435,
+     0.0725,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.8035,
+     0.0725,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      147.5,
+      167.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 30,
+    "slots": {
+     "arrival": "b025"
+    }
+   },
+   "box_id": "P032"
+  },
+  {
+   "step": 32,
+   "box": "b077",
+   "type": 3,
+   "stop": 4,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     0.1975,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.7385,
+     0.1975,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     0.1975,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      42.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 31,
+    "slots": {
+     "arrival": "b077"
+    }
+   },
+   "box_id": "P031"
+  },
+  {
+   "step": 33,
+   "box": "b047",
+   "type": 2,
+   "stop": 4,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7985,
+     0.1975,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.7585,
+     0.1975,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7185,
+     0.1975,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      232.5,
+      42.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 32,
+    "slots": {
+     "arrival": "b047"
+    }
+   },
+   "box_id": "P034"
+  },
+  {
+   "step": 34,
+   "box": "b056",
+   "type": 4,
+   "stop": 4,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7785,
+     0.0725,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     0.0725,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     0.0725,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      252.5,
+      167.5,
+      80.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 33,
+    "slots": {
+     "arrival": "b056"
+    }
+   },
+   "box_id": "P033"
+  },
+  {
+   "step": 35,
+   "box": "b048",
+   "type": 4,
+   "stop": 3,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7935,
+     0.0725,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7535,
+     0.0725,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7135,
+     0.0725,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      237.5,
+      167.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 34,
+    "slots": {
+     "arrival": "b048"
+    }
+   },
+   "box_id": "P035"
+  },
+  {
+   "step": 36,
+   "box": "b003",
+   "type": 2,
+   "stop": 3,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7985,
+     0.0725,
+     -0.26
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7585,
+     0.0725,
+     -0.26
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7185,
+     0.0725,
+     -0.26
+    ],
+    "container_mm": {
+     "center": [
+      232.5,
+      167.5,
+      360.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 35,
+    "slots": {
+     "arrival": "b003"
+    }
+   },
+   "box_id": "P036"
+  },
+  {
+   "step": 37,
+   "box": "b041",
+   "type": 2,
+   "stop": 3,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7985,
+     0.0725,
+     -0.18
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7585,
+     0.0725,
+     -0.18
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7185,
+     0.0725,
+     -0.18
+    ],
+    "container_mm": {
+     "center": [
+      232.5,
+      167.5,
+      440.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 36,
+    "slots": {
+     "arrival": "b041"
+    }
+   },
+   "box_id": "P038"
+  },
+  {
+   "step": 38,
+   "box": "b024",
+   "type": 1,
+   "stop": 3,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     0.1975,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     0.1975,
+     -0.58
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     0.1975,
+     -0.58
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      42.5,
+      40.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 37,
+    "slots": {
+     "arrival": "b024"
+    }
+   },
+   "box_id": "P037"
+  },
+  {
+   "step": 39,
+   "box": "b009",
+   "type": 2,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7985,
+     0.0575,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7585,
+     0.0575,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.7185,
+     0.0575,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      232.5,
+      182.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 38,
+    "slots": {
+     "arrival": "b009"
+    }
+   },
+   "box_id": "P048"
+  },
+  {
+   "step": 40,
+   "box": "b012",
+   "type": 5,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 39,
+    "slots": {
+     "arrival": "b012"
+    }
+   },
+   "box_id": "P052"
+  },
+  {
+   "step": 41,
+   "box": "b028",
+   "type": 5,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 40,
+    "slots": {
+     "arrival": "b028"
+    }
+   },
+   "box_id": "P051"
+  },
+  {
+   "step": 42,
+   "box": "b031",
+   "type": 5,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 41,
+    "slots": {
+     "arrival": "b031"
+    }
+   },
+   "box_id": "P047"
+  },
+  {
+   "step": 43,
+   "box": "b063",
+   "type": 5,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     0.0725,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     0.0725,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     0.0725,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      167.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 42,
+    "slots": {
+     "arrival": "b063"
+    }
+   },
+   "box_id": "P045"
+  },
+  {
+   "step": 44,
+   "box": "b026",
+   "type": 2,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6935,
+     -0.1425,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6535,
+     -0.1425,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6135,
+     -0.1425,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      337.5,
+      382.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 43,
+    "slots": {
+     "arrival": "b026"
+    }
+   },
+   "box_id": "P040"
+  },
+  {
+   "step": 45,
+   "box": "b017",
+   "type": 3,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     0.1975,
+     -0.46
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.6335,
+     0.1975,
+     -0.46
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     0.1975,
+     -0.46
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      42.5,
+      160.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 44,
+    "slots": {
+     "arrival": "b017"
+    }
+   },
+   "box_id": "P044"
+  },
+  {
+   "step": 46,
+   "box": "b071",
+   "type": 4,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7085,
+     0.0725,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6685,
+     0.0725,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6285,
+     0.0725,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      322.5,
+      167.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 45,
+    "slots": {
+     "arrival": "b071"
+    }
+   },
+   "box_id": "P039"
+  },
+  {
+   "step": 47,
+   "box": "b078",
+   "type": 4,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7135,
+     0.0575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6735,
+     0.0575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6335,
+     0.0575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      317.5,
+      182.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 46,
+    "slots": {
+     "arrival": "b078"
+    }
+   },
+   "box_id": "P041"
+  },
+  {
+   "step": 48,
+   "box": "b036",
+   "type": 2,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7135,
+     0.0425,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6735,
+     0.0425,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6335,
+     0.0425,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      317.5,
+      197.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 47,
+    "slots": {
+     "arrival": "b036"
+    }
+   },
+   "box_id": "P046"
+  },
+  {
+   "step": 49,
+   "box": "b045",
+   "type": 3,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     0.1975,
+     -0.3
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.6335,
+     0.1975,
+     -0.3
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     0.1975,
+     -0.3
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      42.5,
+      320.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 48,
+    "slots": {
+     "arrival": "b045"
+    }
+   },
+   "box_id": "P042"
+  },
+  {
+   "step": 50,
+   "box": "b013",
+   "type": 1,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6935,
+     0.1975,
+     -0.18
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6435,
+     0.1975,
+     -0.18
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6035,
+     0.1975,
+     -0.18
+    ],
+    "container_mm": {
+     "center": [
+      337.5,
+      42.5,
+      440.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 49,
+    "slots": {
+     "arrival": "b013"
+    }
+   },
+   "box_id": "P050"
+  },
+  {
+   "step": 51,
+   "box": "b014",
+   "type": 1,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.7885,
+     0.1975,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.7385,
+     0.1975,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.6985,
+     0.1975,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      242.5,
+      42.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 50,
+    "slots": {
+     "arrival": "b014"
+    }
+   },
+   "box_id": "P043"
+  },
+  {
+   "step": 52,
+   "box": "b068",
+   "type": 1,
+   "stop": 2,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6835,
+     0.1975,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.6335,
+     0.1975,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5935,
+     0.1975,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      347.5,
+      42.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 51,
+    "slots": {
+     "arrival": "b068"
+    }
+   },
+   "box_id": "P049"
+  },
+  {
+   "step": 53,
+   "box": "b002",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 52,
+    "slots": {
+     "arrival": "b002"
+    }
+   },
+   "box_id": "P076"
+  },
+  {
+   "step": 54,
+   "box": "b015",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 53,
+    "slots": {
+     "arrival": "b015"
+    }
+   },
+   "box_id": "P075"
+  },
+  {
+   "step": 55,
+   "box": "b023",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 54,
+    "slots": {
+     "arrival": "b023"
+    }
+   },
+   "box_id": "P063"
+  },
+  {
+   "step": 56,
+   "box": "b038",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      82.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 55,
+    "slots": {
+     "arrival": "b038"
+    }
+   },
+   "box_id": "P056"
+  },
+  {
+   "step": 57,
+   "box": "b039",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      82.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 56,
+    "slots": {
+     "arrival": "b039"
+    }
+   },
+   "box_id": "P054"
+  },
+  {
+   "step": 58,
+   "box": "b052",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      82.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 57,
+    "slots": {
+     "arrival": "b052"
+    }
+   },
+   "box_id": "P062"
+  },
+  {
+   "step": 59,
+   "box": "b033",
+   "type": 2,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6085,
+     -0.1425,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5685,
+     -0.1425,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5285,
+     -0.1425,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      422.5,
+      382.5,
+      520.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 58,
+    "slots": {
+     "arrival": "b033"
+    }
+   },
+   "box_id": "P064"
+  },
+  {
+   "step": 60,
+   "box": "b018",
+   "type": 3,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     0.0325,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.5285,
+     0.0325,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     0.0325,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      207.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 59,
+    "slots": {
+     "arrival": "b018"
+    }
+   },
+   "box_id": "P079"
+  },
+  {
+   "step": 61,
+   "box": "b029",
+   "type": 3,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6135,
+     0.0325,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.5635,
+     0.0325,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5235,
+     0.0325,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      417.5,
+      207.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 60,
+    "slots": {
+     "arrival": "b029"
+    }
+   },
+   "box_id": "P072"
+  },
+  {
+   "step": 62,
+   "box": "b035",
+   "type": 3,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6185,
+     0.0325,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.5685,
+     0.0325,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5285,
+     0.0325,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      412.5,
+      207.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 61,
+    "slots": {
+     "arrival": "b035"
+    }
+   },
+   "box_id": "P077"
+  },
+  {
+   "step": 63,
+   "box": "b055",
+   "type": 3,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5785,
+     0.1575,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5285,
+     0.1575,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4885,
+     0.1575,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      452.5,
+      82.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 62,
+    "slots": {
+     "arrival": "b055"
+    }
+   },
+   "box_id": "P055"
+  },
+  {
+   "step": 64,
+   "box": "b016",
+   "type": 1,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.6185,
+     0.0325,
+     -0.1
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.5685,
+     0.0325,
+     -0.1
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.5285,
+     0.0325,
+     -0.1
+    ],
+    "container_mm": {
+     "center": [
+      412.5,
+      207.5,
+      520.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 63,
+    "slots": {
+     "arrival": "b016"
+    }
+   },
+   "box_id": "P067"
+  },
+  {
+   "step": 65,
+   "box": "b059",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4735,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4235,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3835,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      557.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 64,
+    "slots": {
+     "arrival": "b059"
+    }
+   },
+   "box_id": "P058"
+  },
+  {
+   "step": 66,
+   "box": "b064",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4735,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4235,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3835,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      557.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 65,
+    "slots": {
+     "arrival": "b064"
+    }
+   },
+   "box_id": "P068"
+  },
+  {
+   "step": 67,
+   "box": "b066",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4735,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4235,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3835,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      557.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 66,
+    "slots": {
+     "arrival": "b066"
+    }
+   },
+   "box_id": "P074"
+  },
+  {
+   "step": 68,
+   "box": "b067",
+   "type": 5,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4735,
+     0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4235,
+     0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3835,
+     0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      557.5,
+      82.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 67,
+    "slots": {
+     "arrival": "b067"
+    }
+   },
+   "box_id": "P059"
+  },
+  {
+   "step": 69,
+   "box": "b075",
+   "type": 3,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4735,
+     0.0325,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.4235,
+     0.0325,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3835,
+     0.0325,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      557.5,
+      207.5,
+      80.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 68,
+    "slots": {
+     "arrival": "b075"
+    }
+   },
+   "box_id": "P080"
+  },
+  {
+   "step": 70,
+   "box": "b021",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4835,
+     0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4435,
+     0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4035,
+     0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      547.5,
+      82.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 69,
+    "slots": {
+     "arrival": "b021"
+    }
+   },
+   "box_id": "P070"
+  },
+  {
+   "step": 71,
+   "box": "b034",
+   "type": 2,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5185,
+     0.0325,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.4785,
+     0.0325,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4385,
+     0.0325,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      512.5,
+      207.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 70,
+    "slots": {
+     "arrival": "b034"
+    }
+   },
+   "box_id": "P069"
+  },
+  {
+   "step": 72,
+   "box": "b043",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.4835,
+     0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.4435,
+     0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4035,
+     0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      547.5,
+      82.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 71,
+    "slots": {
+     "arrival": "b043"
+    }
+   },
+   "box_id": "P061"
+  },
+  {
+   "step": 73,
+   "box": "b044",
+   "type": 2,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.5235,
+     0.0325,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.16
+    ],
+    "quat_wxyz": [
+     0.7071,
+     0.0,
+     -0.7071,
+     0.0
+    ],
+    "grasp_m": [
+     0.4835,
+     0.0325,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.4435,
+     0.0325,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      507.5,
+      207.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      80,
+      160
+     ]
+    }
+   },
+   "orientation": 1,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 72,
+    "slots": {
+     "arrival": "b044"
+    }
+   },
+   "box_id": "P066"
+  },
+  {
+   "step": 74,
+   "box": "b051",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3785,
+     -0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     -0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     -0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      652.5,
+      397.5,
+      80.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 73,
+    "slots": {
+     "arrival": "b051"
+    }
+   },
+   "box_id": "P060"
+  },
+  {
+   "step": 75,
+   "box": "b053",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3785,
+     -0.1575,
+     -0.38
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     -0.1575,
+     -0.38
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     -0.1575,
+     -0.38
+    ],
+    "container_mm": {
+     "center": [
+      652.5,
+      397.5,
+      240.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 74,
+    "slots": {
+     "arrival": "b053"
+    }
+   },
+   "box_id": "P071"
+  },
+  {
+   "step": 76,
+   "box": "b061",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3785,
+     -0.1575,
+     -0.22
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     -0.1575,
+     -0.22
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     -0.1575,
+     -0.22
+    ],
+    "container_mm": {
+     "center": [
+      652.5,
+      397.5,
+      400.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 75,
+    "slots": {
+     "arrival": "b061"
+    }
+   },
+   "box_id": "P078"
+  },
+  {
+   "step": 77,
+   "box": "b080",
+   "type": 4,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3785,
+     0.1575,
+     -0.54
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.16
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     0.1575,
+     -0.54
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     0.1575,
+     -0.54
+    ],
+    "container_mm": {
+     "center": [
+      652.5,
+      82.5,
+      80.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      160
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 76,
+    "slots": {
+     "arrival": "b080"
+    }
+   },
+   "box_id": "P057"
+  },
+  {
+   "step": 78,
+   "box": "b019",
+   "type": 1,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3885,
+     0.1975,
+     -0.42
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     0.1975,
+     -0.42
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     0.1975,
+     -0.42
+    ],
+    "container_mm": {
+     "center": [
+      642.5,
+      42.5,
+      200.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 77,
+    "slots": {
+     "arrival": "b019"
+    }
+   },
+   "box_id": "P073"
+  },
+  {
+   "step": 79,
+   "box": "b062",
+   "type": 1,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.57
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.52
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3885,
+     0.1125,
+     -0.42
+    ],
+    "size_xyz_m": [
+     0.1,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3385,
+     0.1125,
+     -0.42
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.2985,
+     0.1125,
+     -0.42
+    ],
+    "container_mm": {
+     "center": [
+      642.5,
+      127.5,
+      200.0
+     ],
+     "dims_xyz": [
+      100,
+      80,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 78,
+    "slots": {
+     "arrival": "b062"
+    }
+   },
+   "box_id": "P053"
+  },
+  {
+   "step": 80,
+   "box": "b074",
+   "type": 2,
+   "stop": 1,
+   "kind": "place",
+   "from": {
+    "slot": "arrival",
+    "center_m": [
+     -0.074,
+     0.0,
+     -0.58
+    ],
+    "size_xyz_m": [
+     0.16,
+     0.08,
+     0.08
+    ],
+    "quat_wxyz": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grasp_m": [
+     -0.074,
+     0.0,
+     -0.54
+    ],
+    "grasp_normal": [
+     0,
+     0,
+     1
+    ]
+   },
+   "to": {
+    "slot": "container",
+    "center_m": [
+     0.3985,
+     0.1575,
+     -0.34
+    ],
+    "size_xyz_m": [
+     0.08,
+     0.16,
+     0.08
+    ],
+    "quat_wxyz": [
+     -0.5,
+     -0.5,
+     0.5,
+     0.5
+    ],
+    "grasp_m": [
+     0.3585,
+     0.1575,
+     -0.34
+    ],
+    "grasp_normal": [
+     -1,
+     0,
+     0
+    ],
+    "pre_insert_m": [
+     0.3185,
+     0.1575,
+     -0.34
+    ],
+    "container_mm": {
+     "center": [
+      632.5,
+      82.5,
+      280.0
+     ],
+     "dims_xyz": [
+      80,
+      160,
+      80
+     ]
+    }
+   },
+   "orientation": 0,
+   "approach": "front",
+   "order_violations": 0,
+   "scene_before": {
+    "placed": 79,
+    "slots": {
+     "arrival": "b074"
+    }
+   },
+   "box_id": "P065"
+  }
+ ],
+ "kept": [],
+ "feed_order": [
+  {
+   "feed": 1,
+   "id": "P001",
+   "stop": 6,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 2,
+   "id": "P003",
+   "stop": 6,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 3,
+   "id": "P002",
+   "stop": 6,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 4,
+   "id": "P007",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 5,
+   "id": "P021",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 6,
+   "id": "P024",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 7,
+   "id": "P030",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 8,
+   "id": "P008",
+   "stop": 5,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 9,
+   "id": "P006",
+   "stop": 5,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 10,
+   "id": "P026",
+   "stop": 5,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 11,
+   "id": "P012",
+   "stop": 5,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 12,
+   "id": "P015",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 13,
+   "id": "P018",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 14,
+   "id": "P016",
+   "stop": 5,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 15,
+   "id": "P025",
+   "stop": 5,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 16,
+   "id": "P027",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 17,
+   "id": "P009",
+   "stop": 5,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 18,
+   "id": "P004",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 19,
+   "id": "P014",
+   "stop": 5,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 20,
+   "id": "P013",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 21,
+   "id": "P019",
+   "stop": 5,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 22,
+   "id": "P005",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 23,
+   "id": "P022",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 24,
+   "id": "P010",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 25,
+   "id": "P017",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 26,
+   "id": "P011",
+   "stop": 5,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 27,
+   "id": "P023",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 28,
+   "id": "P028",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 29,
+   "id": "P020",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 30,
+   "id": "P029",
+   "stop": 5,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 31,
+   "id": "P032",
+   "stop": 4,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 32,
+   "id": "P031",
+   "stop": 4,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 33,
+   "id": "P034",
+   "stop": 4,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 34,
+   "id": "P033",
+   "stop": 4,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 35,
+   "id": "P035",
+   "stop": 3,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 36,
+   "id": "P036",
+   "stop": 3,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 37,
+   "id": "P038",
+   "stop": 3,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 38,
+   "id": "P037",
+   "stop": 3,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 39,
+   "id": "P048",
+   "stop": 2,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 40,
+   "id": "P052",
+   "stop": 2,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 41,
+   "id": "P051",
+   "stop": 2,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 42,
+   "id": "P047",
+   "stop": 2,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 43,
+   "id": "P045",
+   "stop": 2,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 44,
+   "id": "P040",
+   "stop": 2,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 45,
+   "id": "P044",
+   "stop": 2,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 46,
+   "id": "P039",
+   "stop": 2,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 47,
+   "id": "P041",
+   "stop": 2,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 48,
+   "id": "P046",
+   "stop": 2,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 49,
+   "id": "P042",
+   "stop": 2,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 50,
+   "id": "P050",
+   "stop": 2,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 51,
+   "id": "P043",
+   "stop": 2,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 52,
+   "id": "P049",
+   "stop": 2,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 53,
+   "id": "P076",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 54,
+   "id": "P075",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 55,
+   "id": "P063",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 56,
+   "id": "P056",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 57,
+   "id": "P054",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 58,
+   "id": "P062",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 59,
+   "id": "P064",
+   "stop": 1,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 60,
+   "id": "P079",
+   "stop": 1,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 61,
+   "id": "P072",
+   "stop": 1,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 62,
+   "id": "P077",
+   "stop": 1,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 63,
+   "id": "P055",
+   "stop": 1,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 64,
+   "id": "P067",
+   "stop": 1,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 65,
+   "id": "P058",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 66,
+   "id": "P068",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 67,
+   "id": "P074",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 68,
+   "id": "P059",
+   "stop": 1,
+   "type": 5,
+   "status": "loaded"
+  },
+  {
+   "feed": 69,
+   "id": "P080",
+   "stop": 1,
+   "type": 3,
+   "status": "loaded"
+  },
+  {
+   "feed": 70,
+   "id": "P070",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 71,
+   "id": "P069",
+   "stop": 1,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 72,
+   "id": "P061",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 73,
+   "id": "P066",
+   "stop": 1,
+   "type": 2,
+   "status": "loaded"
+  },
+  {
+   "feed": 74,
+   "id": "P060",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 75,
+   "id": "P071",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 76,
+   "id": "P078",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 77,
+   "id": "P057",
+   "stop": 1,
+   "type": 4,
+   "status": "loaded"
+  },
+  {
+   "feed": 78,
+   "id": "P073",
+   "stop": 1,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 79,
+   "id": "P053",
+   "stop": 1,
+   "type": 1,
+   "status": "loaded"
+  },
+  {
+   "feed": 80,
+   "id": "P065",
+   "stop": 1,
+   "type": 2,
+   "status": "loaded"
+  }
+ ],
+ "not_loaded": [],
+ "plan_tries": [
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": true
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  },
+  {
+   "util_rig": 0.40336463223787167,
+   "placed": 80,
+   "kept": 0,
+   "violations": 0,
+   "moves": 80,
+   "unstable_skipped": 0,
+   "motion_skipped": 0,
+   "reason": "done",
+   "chosen": false
+  }
+ ]
+}

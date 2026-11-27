@@ -36,8 +36,8 @@ def test_suction(ard, dwell: float = 1.0):
     """SimSuction/RealSuction 모두 쓰는 API 한 바퀴.
 
     on/off      : 밸브 저수준
-    grip(mode)  : 상위 API (suction.py 가 on() 호출)
-    un_grip()   : off() 호출
+    grip()      : 상위 API — on() 호출
+    un_grip()   : 상위 API — off() 호출
     """
     s = RealSuction(ard)
 
@@ -52,19 +52,12 @@ def test_suction(ard, dwell: float = 1.0):
     time.sleep(dwell)
     print(f"holding() = {s.holding()}   (기대: False)")
 
-    section("Suction — grip('pack') → un_grip()")
-    s.grip("pack")
+    section("Suction — grip() → un_grip()")
+    s.grip()
     time.sleep(dwell)
     print(f"holding() = {s.holding()}   (기대: True)")
     s.un_grip()
     time.sleep(dwell)
-    print(f"holding() = {s.holding()}   (기대: False)")
-
-    section("Suction — grip('unpack') → un_grip()")
-    s.grip("unpack")
-    time.sleep(dwell)
-    print(f"holding() = {s.holding()}   (기대: True)")
-    s.un_grip()
     print(f"holding() = {s.holding()}   (기대: False)")
 
 
